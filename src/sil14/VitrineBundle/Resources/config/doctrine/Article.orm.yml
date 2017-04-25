@@ -1,0 +1,31 @@
+sil14\VitrineBundle\Entity\Article:
+    type: entity
+    table: article
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        libelle:
+            type: string
+            length: 100
+        description:
+            type: text
+        prix:
+            type: decimal
+            scale: 2
+        promotion:
+            type: boolean
+        stock:
+            type: integer
+    manyToOne:
+        categorie:
+            targetEntity: Categorie
+            inversedBy: articles
+            joinColumn:
+                libelle: categorie_id
+                referencedColumnName: id
+    oneToMany: 
+            ligneCommande:
+                targetEntity: Article
+                mappedBy: Categorie

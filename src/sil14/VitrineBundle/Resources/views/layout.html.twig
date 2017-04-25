@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    
+    <title>  {% block title endblock %} </title>
+    
+     <!-- Bootstrap core CSS -->
+    <link href="{{ asset('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Custom style CSS -->
+    <link href="{{ asset('bundles/vitrine/style.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="top_accueil">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <header class="header">
+                        <div id="logo_nom">
+                            <a href="accueil.html"><img src="{{ asset('bundles/vitrine/images/logo.png') }}" alt="logo" />
+                                <h1>Le Bon CoinCoin</h1></a>
+                        </div>
+                    </header>
+                </div>
+                <!-- fin col-md-3 -->
+                <div class="col-md-9">
+                    <nav class="nav">
+                        <ul>
+                            <li>
+                                <a href="/accueil"><span id="ICI">Accueil</span></a>
+                            </li>
+                            <li>
+                                <a href="/catalogue"><span id="canards">Catalogue</span></a>
+                            </li>
+                            <li>
+                                <a href="/mentions">Mentions légales</a>
+                            </li>
+                            <li>
+                                <a href="/panier">Mon Panier</a>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                    <!-- fin nav -->
+                </div>
+                <!-- fin col-md-9 -->
+            </div>
+            <!-- fin row -->
+        </div>
+        <!-- fin content -->
+    </div>
+    <!-- fin top-accueil -->
+    {% block content endblock %}
+    
+    <!-- FOOTER -->
+    <span class="footer">
+        <!--Kévin COISSARD ©AucunsDroitsReservés -->
+    </span>
+    
+</body>
+
+
+
+</html>

@@ -1,0 +1,24 @@
+sil14\VitrineBundle\Entity\LigneCommande:
+    type: entity
+    table: ligneCommande
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+        article:
+            associationKey: true
+        commande:
+            associationKey: true
+    fields:
+        prix:
+            type: decimal
+            scale: 2
+        quantite:
+            type: integer
+    manyToOne:
+        categorie:
+            targetEntity: Categorie
+            inversedBy: articles
+            joinColumn:
+                libelle: categorie_id
+                referencedColumnName: id

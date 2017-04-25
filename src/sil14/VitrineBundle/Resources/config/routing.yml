@@ -1,0 +1,19 @@
+vitrine_homepage:
+    path:     /accueil/{name}
+    defaults: { _controller: VitrineBundle:Default:index, name: visiteur }
+    
+mentions:
+    pattern:     /mentions
+    defaults: { _controller: VitrineBundle:Default:mentions}
+    
+catalogue:
+    pattern:     /catalogue
+    defaults: { _controller: VitrineBundle:Default:catalogue}
+
+panier:
+    pattern:     /panier
+    defaults: { _controller: VitrineBundle:Default:panier}
+    
+creer:
+    pattern:     /creer
+    defaults: { _controller: VitrineBundle:Default:creer}

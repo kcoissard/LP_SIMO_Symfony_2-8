@@ -1,0 +1,159 @@
+{% extends "VitrineBundle::layout.html.twig" %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block content %}
+
+<div class="content">
+<div class="row">
+    <div class="col-md-3">
+        <div class="left-aside">
+            <div class="thumbnail">
+                <div class="panel-default">
+                    <div class="panel-heading">RECHERCHE</div>
+                    <div class="panel-body">
+                        <form action="ducklist.html" method="get">
+                            
+                            <label> Catégories
+                                <select class="form-control">
+                                    <!-- get all, for each à faire -->
+                                    <option>Coin Coins Classique</option>
+                                    <option>International</option>
+                                    <option>Fête</option>
+                                    <option>Métiers</option>
+                                    <option>Personnages célèbres</option>
+                                    <option>Coin Coins de collection</option>
+                                    <option>Enfant</option>
+                                    <option>Promo</option>
+                                </select>
+                            </label>
+                            
+                            <br/>
+                            
+                            <label> Couleur
+                                <select class="form-control">
+                                    <option>Jaune</option>
+                                    <option>Rouge</option>
+                                    <option>Noir</option>
+                                    <option>Vert</option>
+                                    <option>Bleu</option>
+                                    <option>Rose</option>
+                                </select>
+                            </label>
+
+                            <br/>
+
+                            <label> Prix Minimum
+                                <select class="form-control" name="prix_min">
+                                    <option> Moins de 5€ </option>
+                                    <option>10€</option>
+                                    <option>15€</option>
+                                    <option>20€</option>
+                                    <option>25€</option>
+                                    <option> Plus 30€</option>
+                                </select>
+                            </label>
+                            <label> Prix Maximum
+                                <select class="form-control" name="prix_max">
+                                    <option> Moins de 5€ </option>
+                                    <option>10€</option>
+                                    <option>15€</option>
+                                    <option>20€</option>
+                                    <option>25€</option>
+                                    <option> Plus 30€</option>
+                                </select>
+                            </label>
+                            <br/>
+                            <input type="submit" class="btn btn-default btn-submit" value="Chercher ! " />
+                        </form>
+                    </div>
+                    <!-- fin panel-body -->
+                </div>
+                <!-- fin panel-default -->
+            </div>
+            <!-- fin thumbnail -->
+
+            <div class="thumbnail promo">
+                <div class="panel-default">
+                    <div class="panel-heading"> LE COINCOIN DES PROMO' </div>
+                    
+                {% for promo in promotions %}
+
+                    <!-- FOR EACH SUR LES COIN COIN PROMO=TRUE -->
+                    <div class="thumbnail">
+                        <div class="panel-default">
+                            
+                            <div class="panel-heading"> {{ article.libelle }} </div>
+                            
+                                <a href="" class="post-image-link">  <!-- <a href="images/clerc.jpg"> -->
+                                   <img src="{{ asset('bundles/vitrine/images/' ~ article.libelle|lower ~ '.jpg') }}" class="img-rounded" alt="{{article.libelle}}" /> 
+                                </a>
+                            
+                            <div class="caption">
+                                <del> {{ article.prix }} </del>
+                                {% set prix_gonfle=article.prix %}
+                                {% set prix_gonfle=prix_gonfle+(article.prix*0.2) %}
+                                {{ prix_gonfle }} €
+                                <h2> {{ article.prix }} €</h2>
+                                <p> {{ article.description }} </p>
+                                <a class="btn btn-default">Consulter</a> <!--  href="article.html" -->
+                            </div>
+                            <!-- fin caption -->
+                        </div>
+                        <!-- fin panel-default -->
+                    </div>
+                    <!-- fin thumbnail -->
+                {% endfor %}
+                    
+                </div>
+                <!-- fin panel-default -->
+            </div>
+            <!-- fin thumbnail-promo-->
+        </div>
+        <!-- fin left-aside -->
+    </div>
+    <!-- fin col-md-3 -->
+
+    <!-- FOR EACH SUR LES COIN COIN, gérer la pagination par la suite -->
+    <div class="col-md-9">
+        {% for article in articles %}
+            <div class="col-lg-4 col-sm-6">
+                <div class="thumbnail">
+                    <div class="panel-default">
+                        <div class="panel-heading"> {{ article.libelle }} </div>
+                        <a class="post-image-link"> <!-- href="/images/ninja.jpg"  -->
+                            <img src="{{ asset('bundles/vitrine/images/' ~ article.libelle|lower ~ '.jpg') }}" class="img-rounded" alt="{{article.libelle}}" /> <!-- src="images/ninja.jpg" -->
+                        </a>
+                        <div class="caption">
+                            <h2> {{ article.prix }}€ </h2>
+                            <p> {{ article.description }} </p>
+                            <a class="btn btn-default" >Consulter</a> <!-- href="article.html" -->
+                        </div>
+                        <!-- fin caption -->
+                    </div>
+                    <!-- fin panel-default -->
+                </div>
+                <!-- fin thumbnail -->
+            </div>
+            <!-- fin col-lg-4 col-sm-6 -->
+        {% endfor %}
+
+        <!--
+        <nav class="pagination">
+            <ul class="pager">
+                <li><a href="#">Précédent</a></li>
+                <li><a href="#">Suivant</a></li>
+            </ul>
+        </nav>
+        -->
+    </div>
+    <!-- fin col-md-9 -->
+</div>
+<!-- fin row -->
+
+
+
+</div>
+<!-- fin content -->
+    
+{% endblock %}
