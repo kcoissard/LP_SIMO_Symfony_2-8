@@ -72,43 +72,10 @@
                 <!-- fin panel-default -->
             </div>
             <!-- fin thumbnail -->
-
-            <div class="thumbnail promo">
-                <div class="panel-default">
-                    <div class="panel-heading"> LE COINCOIN DES PROMO' </div>
-                    
-                {% for promo in promotions %}
-
-                    <!-- FOR EACH SUR LES COIN COIN PROMO=TRUE -->
-                    <div class="thumbnail">
-                        <div class="panel-default">
-                            
-                            <div class="panel-heading"> {{ article.libelle }} </div>
-                            
-                                <a href="" class="post-image-link">  <!-- <a href="images/clerc.jpg"> -->
-                                   <img src="{{ asset('bundles/vitrine/images/' ~ article.libelle|lower ~ '.jpg') }}" class="img-rounded" alt="{{article.libelle}}" /> 
-                                </a>
-                            
-                            <div class="caption">
-                                <del> {{ article.prix }} </del>
-                                {% set prix_gonfle=article.prix %}
-                                {% set prix_gonfle=prix_gonfle+(article.prix*0.2) %}
-                                {{ prix_gonfle }} €
-                                <h2> {{ article.prix }} €</h2>
-                                <p> {{ article.description }} </p>
-                                <a class="btn btn-default">Consulter</a> <!--  href="article.html" -->
-                            </div>
-                            <!-- fin caption -->
-                        </div>
-                        <!-- fin panel-default -->
-                    </div>
-                    <!-- fin thumbnail -->
-                {% endfor %}
-                    
-                </div>
-                <!-- fin panel-default -->
-            </div>
-            <!-- fin thumbnail-promo-->
+             
+            <!-- COINCOIN DES PROMOS -->
+            {% include 'VitrineBundle:Article:promotions.html.twig' %}
+            
         </div>
         <!-- fin left-aside -->
     </div>

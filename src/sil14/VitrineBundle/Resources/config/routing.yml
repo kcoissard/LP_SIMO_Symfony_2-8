@@ -1,19 +1,43 @@
+#pages statiques
 vitrine_homepage:
     path:     /accueil/{name}
     defaults: { _controller: VitrineBundle:Default:index, name: visiteur }
-    
 mentions:
-    pattern:     /mentions
+    path:     /mentions
     defaults: { _controller: VitrineBundle:Default:mentions}
-    
-catalogue:
-    pattern:     /catalogue
-    defaults: { _controller: VitrineBundle:Default:catalogue}
 
-panier:
-    pattern:     /panier
-    defaults: { _controller: VitrineBundle:Default:panier}
+
+#front sans connexion
+catalogue:
+    path:     /catalogue
+    defaults: { _controller: VitrineBundle:Article:index}
+articles_par_categorie:
+    path:     /catalogue/{id_categorie_article}
+    defaults: { _controller: VitrineBundle:Categorie:index }
+
     
-creer:
-    pattern:     /creer
-    defaults: { _controller: VitrineBundle:Default:creer}
+    
+#/connexion/deconnexion/incription
+#connexion:
+ #   path:     /connexion
+  #  defaults: { _controller: VitrineBundle:Client:logIn }
+
+#deconnexion:
+ #   path:     /deconnexion
+  #  defaults: { _controller: VitrineBundle:Client:logOut }
+
+#inscription:
+ #   path:     /inscription
+  #  defaults: { _controller: VitrineBundle:Client:inscription }
+
+#front une fois connecté
+#panier:
+    #path:     /panier
+    #defaults: { _controller: VitrineBundle:Panier:panier}
+#...
+
+#utils
+#creer_commande:
+    #path:     /creer
+    #defaults: { _controller: VitrineBundle:Commande:creer}
+#...

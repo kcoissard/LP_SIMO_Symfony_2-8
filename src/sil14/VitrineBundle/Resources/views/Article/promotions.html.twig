@@ -1,0 +1,36 @@
+<div class="thumbnail promo">
+                <div class="panel-default">
+                    <div class="panel-heading"> LE COINCOIN DES PROMO' </div>
+
+                {% for promo in promotions %}
+
+                    <!-- FOR EACH SUR LES COIN COIN PROMO=TRUE -->
+                    <div class="thumbnail">
+                        <div class="panel-default">
+
+                            <div class="panel-heading"> {{ promo.libelle }} </div>
+
+                                <a href="" class="post-image-link">  <!-- <a href="images/clerc.jpg"> -->
+                                   <img src="{{ asset('bundles/vitrine/images/' ~ promo.libelle|lower ~ '.jpg') }}" class="img-rounded" alt="{{promo.libelle}}" /> 
+                                </a>
+
+                            <div class="caption">
+                                <del> {{ promo.prix }} </del>
+                                {% set prix_gonfle=promo.prix %}
+                                {% set prix_gonfle=prix_gonfle+(promo.prix*0.2) %}
+                                {{ prix_gonfle }} €
+                                <h2> {{ promo.prix }} €</h2>
+                                <p> {{ promo.description }} </p>
+                                <a class="btn btn-default">Consulter</a> <!--  href="promo.html" -->
+                            </div>
+                            <!-- fin caption -->
+                        </div>
+                        <!-- fin panel-default -->
+                    </div>
+                    <!-- fin thumbnail -->
+                {% endfor %}
+
+                </div>
+                <!-- fin panel-default -->
+            </div>
+            <!-- fin thumbnail-promo-->
