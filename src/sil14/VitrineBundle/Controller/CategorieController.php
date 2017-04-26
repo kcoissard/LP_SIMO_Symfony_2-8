@@ -17,33 +17,33 @@ class CategorieController {
     //action de base - tri par id de categorie
     public function indexAction($id_categorie_article)
     {
-        $categorie = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('VitrineBundle:Categorie')
-                ->find($id_categorie_article);
-         
-        if(!$categorie){
-            //throw $this->createNotFoundException('La catégorie demandée n'existe pas !');
-
-            //Encadré rouge 
-            $this->addFlash(
-                'danger',//notice
-                'La catégorie demandée n\'existe pas !'
-            );
-            // $this->addFlash() is equivalent to $request->getSession()->getFlashBag()->add()
-          
+        $articles=triParCategorie($id_categorie_article);
+        if(empty($articles)){
             return $this->redirect($this->generateUrl('catalogue'));
-          
-        } else {
-          $articles = $categorie->getArticles();
-          
-          //Formulaires à gérer ici
-          
-          return $this->render('VitrineBundle:Article:index.html.twig',
-                               array('articles' => $articles,
-                                     'categorie' => $categorie,
-                                   )
-                                 );
+        }
+        else {
+            return $this->render('VitrineBundle:Article:index.html.twig', array('articles' => $articles,));
         }
       }
+      
+    public function triParCategorie($id_categorie_article){
+        
+        $articles = array();
+        
+        $categorie = $this->getDoctrine()
+              ->getManager()
+              ->getRepository('VitrineBundle:Categorie')
+              ->find($id_categorie_article);
+
+        if(!$categorie){
+          //Encadré rouge 
+          $this->addFlash(
+              'danger',//notice
+              'La catégorie demandée n\'existe pas !'
+          );
+        }else{
+            $articles = $categorie->getArticles();
+        }
+        return $articles;
+    }
 }

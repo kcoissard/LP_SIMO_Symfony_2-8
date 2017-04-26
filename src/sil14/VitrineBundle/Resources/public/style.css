@@ -3,8 +3,16 @@
 
 /* ajout symfony */
 .footer {
-            position: absolute;
-        }
+    position: absolute;
+}
+
+#formulaire_filtrage_articles > div > label{
+    display:inherit;
+}
+
+#formulaire_filtrage_articles_Categories{
+    color:black;
+}
 
 /* Definition des polices personnalisees */
 @font-face {
@@ -441,7 +449,7 @@ del {
 }
 
 /*taille d'image par défaut*/
-img.img-rounded{
+div.col-md-9 img.img-rounded{
     min-width: 323.5px;
     min-height: 323.5px;
 }

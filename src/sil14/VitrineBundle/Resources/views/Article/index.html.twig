@@ -32,7 +32,16 @@
                         <div class="caption">
                             <h2> {{ article.prix }}€ </h2>
                             <p> {{ article.description }} </p>
-                            <a class="btn btn-default" >Consulter</a> <!-- href="article.html" -->
+                            {% if article.stock>8 %}
+                                <span class="btn btn-success">Stock : {{ article.stock }}</span>
+                            {% elseif article.stock<9 and article.stock>4 %}
+                                <span class="btn btn-warning">Stock : {{ article.stock }}</span>
+                            {% elseif article.stock<5 and article.stock>0 %}
+                                <span class="btn btn-danger">Stock : {{ article.stock }}</span>
+                            {% else %}
+                                <span class="btn btn-default">Article épuisé !</span>
+                            {% endif %}
+                            <span class="glyphicon glyphicon-shopping-cart" ></span> <!-- href="article.html" -->
                         </div>
                         <!-- fin caption -->
                     </div>

@@ -237,4 +237,19 @@ class Article
     {
         return $this->categorie;
     }
+    
+    
+    public function findByCategorie($idCategorie){
+        $qb = $this->createQueryBuilder('article');
+
+        $qb
+          ->where('article.categorie = :categorie')
+          ->setParameter('categorie', $idCategorie)
+        ;
+
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+    }
 }
