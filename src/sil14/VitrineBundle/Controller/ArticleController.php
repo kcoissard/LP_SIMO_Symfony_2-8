@@ -25,7 +25,7 @@ class ArticleController extends Controller{
                 ->findAll();
 
         //on récupère les promotions s'il y en a
-        $promotions=$this->promotions();
+        //$promotions=$this->promotions();
         
         if(!$articles)
         { 
@@ -42,24 +42,31 @@ class ArticleController extends Controller{
                 array(
                     'articles' => $articles,
                     'categories' => $categories,
-                    'promotions' => $promotions,
+                    //'promotions' => $promotions,
                 ));
         }
     }
     
     //Coincoin des promotions
-    public function promotions()
+    public function promotionsAction()
     {
         $em=$this->getDoctrine()
                 ->getManager();
         $query=$em->createQuery( 'SELECT a FROM VitrineBundle:Article a WHERE a.promotion=1' );
         $promotions=$query->getResult();
         
+        /*
         if(!$promotions)
         { 
             return '';
         }else{
             return $promotions;
         }
+         * */
+       return $this->render('VitrineBundle:Article:promotions.html.twig',
+                array(
+                    'promotions' => $promotions,
+                ));
+        
     }
 }

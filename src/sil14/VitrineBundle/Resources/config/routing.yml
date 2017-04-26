@@ -11,6 +11,9 @@ mentions:
 catalogue:
     path:     /catalogue
     defaults: { _controller: VitrineBundle:Article:index}
+catalogue:
+    path:     /catalogue
+    defaults: { _controller: VitrineBundle:Article:promotions}
 articles_par_categorie:
     path:     /catalogue/{id_categorie_article}
     defaults: { _controller: VitrineBundle:Categorie:index }

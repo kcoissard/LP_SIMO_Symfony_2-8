@@ -1,0 +1,38 @@
+<div class="thumbnail">
+    <div class="panel-default">
+        <div class="panel-heading">RECHERCHE</div>
+        <div class="panel-body">
+            <form action="ducklist.html" method="get">
+
+                <label> Catégories
+                    <select class="form-control">
+                        {% for categorie in categories %}
+                        <option value="{{ categorie.id }}">{{ categorie.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <br/>
+
+                <label class="form-check-label">
+                     <input type="checkbox" class="form-check-input" name="promortion" value="TRUE"><br />
+                      Promotion
+                </label>
+
+                <br/>
+
+                <label> Prix Minimum
+                    <input type="number" class="form-control">
+                </label>
+                <label> Prix Maximum
+                    <input type="number" class="form-control">
+                </label>
+                <br/>
+                <input type="submit" class="btn btn-default btn-submit" value="Chercher ! " />
+            </form>
+        </div>
+        <!-- fin panel-body -->
+    </div>
+    <!-- fin panel-default -->
+</div>
+<!-- fin thumbnail -->

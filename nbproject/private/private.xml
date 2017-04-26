@@ -3,10 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/views/Article/index.html.twig</file>
             <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/config/routing.yml</file>
-            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/views/pages/catalogue.html.twig</file>
-            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/DefaultController.php</file>
-            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/public/style.css</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/ArticleController.php</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/views/Article/rechercheParCategorie.html.twig</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Entity/Article.php</file>
         </group>
     </open-files>
 </project-private>
