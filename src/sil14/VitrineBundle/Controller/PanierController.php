@@ -16,7 +16,7 @@ class PanierController extends Controller{
     
     //action de base
     public function indexAction()
-    {
+    {    
         $article_manager = $this->getDoctrine()
                 ->getManager()
                 ->getRepository('VitrineBundle:Article');
@@ -59,7 +59,7 @@ class PanierController extends Controller{
         }else{
           return $this->render('VitrineBundle:Panier:index.html.twig', array('articles' => $articles, 'form' => null));
         }
-
+        
         return $this->render('VitrineBundle:Panier:index.html.twig',
                 array(
                     'articles' => $articles,
@@ -75,7 +75,7 @@ class PanierController extends Controller{
     {
       $article_manager = $this->getDoctrine()
               ->getManager()
-              ->getRepository('VitrineBundle:Product');
+              ->getRepository('VitrineBundle:Article');
       
       $session = $this->getRequest()->getSession();
       $panier = $session->get('panier', new Panier());
@@ -104,7 +104,7 @@ class PanierController extends Controller{
                         "data" => $panier->getContenu()[$article_id],
                         ));
           }
-          $prix_total+=$article->getPrice()*$qte;
+          $prix_total+=$article->getPrix()*$qte;
         }
         
         $formBuilder->add('submit', 'submit');
@@ -132,10 +132,16 @@ class PanierController extends Controller{
     public function ajoutArticlePanierAction(){
         $session = $this->getRequest()->getSession();
         $params = $this->getRequest()->request->get('form');
+        
+        //pour connaitre l'actuelle route
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+        
         $article_id = (int)$params['id_article'];
         $quantity = $params['quantity'];
         $article = $this->findArticle($article_id);
         $panier = $session->get('panier', new Panier());
+        
         if(!empty($panier->getContenu())){
             $panier_article_quantity = array_key_exists($article_id, $panier->getContenu()) ? $panier->getContenu()[$article_id] : 0;
         }else{
@@ -146,12 +152,18 @@ class PanierController extends Controller{
           $panier->ajoutArticle($article_id, $quantity);
           $session->set('panier', $panier);
           $this->addFlash('success', "Produit ajouté !");
-          return $this->redirect($this->generateUrl('panier'));
+          if($routeName=="panier"){
+            return $this->redirect($this->generateUrl('panier'));
+          }
+          return $this->redirect($this->generateUrl('catalogue'));
         } else {
           if(!$article){
             $this->addFlash('danger', "Article inconnu");
           } else {
             $this->addFlash('danger', "Il n'y a pas assez de stocks");
+          }
+          if($routeName=="panier"){
+            return $this->redirect($this->generateUrl('panier'));
           }
           return $this->redirect($this->generateUrl('catalogue'));
         }
@@ -164,15 +176,28 @@ class PanierController extends Controller{
     public function suppressionArticlePanierAction($id_article){
         $session = $this->getRequest()->getSession();
         $article = $this->findArticle($id_article);
+        
+        //pour connaitre l'actuelle route
+        $request = $this->container->get('request');
+        $routeName = $request->get('_route');
+          
         if($article){
           $panier = $session->get('panier', new Panier());
           $panier->supprimeArticle($id_article);
           $session->set('panier', $panier);
           $this->addFlash('success', "Article supprimé !");
-          return $this->redirect($this->generateUrl('panier'));
+          
+
+          if($routeName=="panier"){
+              return $this->redirect($this->generateUrl('panier'));
+          }
+          return $this->redirect($this->generateUrl('catalogue'));
         } else {
           $this->addFlash('danger', "Erreur lors de la suppression");
-          return $this->redirect($this->generateUrl('panier'));
+          if($routeName=="panier"){
+            return $this->redirect($this->generateUrl('panier'));
+          }
+          return $this->redirect($this->generateUrl('catalogue'));
         }
         
     }
@@ -204,7 +229,7 @@ class PanierController extends Controller{
       if (!$article) {
         $session = $this->getRequest()->getSession();
         $panier = $session->get('panier', new Panier());
-        $panier->deleteProduct($id_article);
+        $panier->deleteArticle($id_article);
         $session->set('panier', $panier);
         return null;
       } else {

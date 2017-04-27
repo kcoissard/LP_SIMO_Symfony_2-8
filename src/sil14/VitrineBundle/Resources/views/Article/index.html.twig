@@ -10,10 +10,14 @@
         <div class="left-aside">
             <!-- RECHERCHE PAR CATAGOERIE -->
             {% include 'VitrineBundle:Article:rechercheParCategorie.html.twig' %}
-             
+            
+            <!-- controlleurs imbriqués -->
+            {{ render(controller('VitrineBundle:Panier:contenuPanier')) }} 
+            
+            
             <!-- COINCOIN DES PROMOS -->
             <!-- controlleurs imbriqués -->
-            {{ render(controller('VitrineBundle:Article:promotions',{'max': 1})) }} 
+            {{ render(controller('VitrineBundle:Article:promotions',{'max': 2})) }} 
         </div>
         <!-- fin left-aside -->
     </div>

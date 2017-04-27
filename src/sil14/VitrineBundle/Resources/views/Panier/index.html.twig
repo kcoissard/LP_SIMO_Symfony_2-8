@@ -14,16 +14,16 @@
                             <tr>
                                 <th></th>
                                 <th>Produit</th>
-                                <th>Prix</th>
                                 <th>Quantité</th>
+                                <th>Prix</th>
                                 <th></th>
                             </tr>
                             
                             {% set prix_total=0 %}
                             {% for champs in articles %}
                                 <tr class="ligne-tableau">
-                                    <td>
-                                      <img src="{{ asset('bundles/vitrine/images/' ~ champs['article'].libelle|lower ~ '.jpg') }}" class="img-circle" alt="{{ champs['article'].libelle }}" />
+                                  <td>
+                                    <img src="{{ asset('bundles/vitrine/images/' ~ champs['article'].libelle|lower ~ '.jpg') }}" class="img-circle" alt="{{ champs['article'].libelle }}" />
                                   </td>
                                   <td>{{ champs['article'].libelle }}</td>
                                   <td>{{ champs['qte']  }}</td>

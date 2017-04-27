@@ -51,9 +51,22 @@ div.panier .row table{
     width:95%;
 }
 
-.boutons_bas_panier{
+.panier .boutons_bas_panier{
     padding-left: 40%;
     margin: 10px;
+}
+.boutons_bas_panier{
+    display: inline;
+}
+
+.row.mon_panier_catalogue{
+    padding: 10px;
+    text-align: center;
+}
+
+.glyphicon-shopping-cart:before {
+    content: "\e116";
+    color: darkblue!important;
 }
 /* Definition des polices personnalisees */
 @font-face {
@@ -469,11 +482,6 @@ del {
 
 .suggestions .panel-heading {
     margin-bottom: 20px;
-}
-
-.left-aside {
-    margin-left: 20px;
-    margin-right: -10px;
 }
 
 .accueil {
