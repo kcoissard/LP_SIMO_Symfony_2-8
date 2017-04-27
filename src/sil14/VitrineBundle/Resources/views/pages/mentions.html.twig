@@ -1,1 +1,89 @@
-<h1><strong>Mentions Légales </strong></h1>
+{% extends "VitrineBundle::layout.html.twig" %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block content %}
+    <div class="equipe">
+        <article>
+            <div class="thumbnail">
+                <div class="panel-default">
+                    <div class="panel-heading"> Le projet </div>
+                    <div class="panel-body">
+                        <p>
+                            <h1>Sujet du projet Symfony 2.8</h1>
+                            <h2>Développer un site de vente en ligne (produits au choix) avec un :</h2>
+                            <h2>- « Front-office » permettant à des utilisateurs, connectés via un navigateur Web, de : </h2>
+                            <br>
+                            <ul>
+                                <li>
+                                    Consulter le catalogue d’un commerçant : catégories d’articles, liste des articles d’une catégorie donnée, caractéristique d’un article (photo, prix, quantité en stock, etc…).
+                                </li>
+                                <li>
+                                    Constituer un « panier » et passer commande en s’inscrivant sur le site. 
+                                </li>
+                                <li>
+                                    Revenir ensuite consulter l’état d’avancement de leurs commandes. 
+                                </li>
+                            </ul>
+
+                            <h2>- Ainsi qu'un « back-office » permettant à un administrateur de gérer la base de données : </h2>
+
+                            <ul>
+                                <li>Ajouter/supprimer des catégories et des articles </li>
+                                <li>Mettre à jour les stocks</li>
+                                <li>Valider  les commandes en attente</li>
+                            </ul>
+                           
+                            <h2>Contraintes :</h2>
+                            <ul>
+                                <li>Utilisation de Symfony 2.8 obligatoire.</li>
+                                <li>Pas de contraites sur le style : Bootstrap autorisé/templates personnels autorisés</li>
+                                <li>Faites en sorte que la navigation dans votre application soit simple et complète (possibilité d’accéder du front-office au back-office et réciproquement) </li>
+                            </ul>
+
+                            <h2>S'il reste du temps, rajouter quelques fonctionnalités, par exemple :</h2>
+                            <ul>
+                                <li>Afficher dans le layout des informations sur l’utilisateur quand il est connecté</li>
+                                <li>Permettre à un utilisateur connecté de modifier ses informations personnelles</li>
+                                <li>Afficher dans le catalogue la liste des N articles les plus vendus</li>
+                                <li>Afficher des suggestions d’articles fréquemment achetés avec d’autres articles </li>
+                                <li>Permettre aux utilisateurs connectés de noter/donner leur avis sur des articles</li>
+                                <li>Envoyer un mail récapitulatif à un client lorsque sa commande est validée</li>
+                                <li>Et/ou tout ce que vous jugerez pertinent</li>
+                            </ul>
+
+                    </div>
+                    <!-- fin panel-body -->
+                </div>
+                <!-- fin panel-default -->
+            </div>
+            <!-- fin thumbnail -->
+        </article>
+
+
+        <article>
+            <div class="thumbnail">
+                <div class="panel-default">
+                    <div class="panel-heading">Développeur</div>
+                    <div class="panel-body">
+                        <p> Ce site a été réalisé dans le cadre d'un cours "Framework de développement rapide en PHP" grâce au framerwork PHP «Symfony 2.8», par :</p>
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-2">
+                                <img class="img-circle" src="images/kevin.png" alt="photo-kevin" />
+                            </div>
+                            <div class="col-md-4">
+                                <h2> Kévin Coissard</h2>
+                                <p> Etudiant en Licence Professionnelle SIMO à l'IUT Grenoble 2. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- fin panel-body -->
+                </div>
+                <!-- fin panel-default -->
+            </div>
+            <!-- fin thumbnail -->
+        </article>
+    </div>
+    <!-- fin equipe -->
+{% endblock %}

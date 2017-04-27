@@ -3,9 +3,6 @@
 namespace sil14\VitrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use sil14\VitrineBundle\Entity\Article;
-use sil14\VitrineBundle\Entity\Categorie;
-use Symfony\Component\HttpFoundation\Response; 
 
 /**
  * Description of CategorieController
@@ -17,7 +14,7 @@ class CategorieController {
     //action de base - tri par id de categorie
     public function indexAction($id_categorie_article)
     {
-        $articles=triParCategorie($id_categorie_article);
+        $articles=$this->triParCategorie($id_categorie_article);
         if(empty($articles)){
             return $this->redirect($this->generateUrl('catalogue'));
         }

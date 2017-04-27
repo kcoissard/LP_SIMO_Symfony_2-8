@@ -21,7 +21,16 @@
                                 {{ prix_gonfle }} €
                                 <h2> {{ promo.prix }} €</h2>
                                 <p> {{ promo.description }} </p>
-                                <a class="btn btn-default">Consulter</a> <!--  href="promo.html" -->
+                                {% if promo.stock>8 %}
+                                <span class="btn btn-success">Stock : {{ promo.stock }}</span>
+                                {% elseif promo.stock<9 and promo.stock>4 %}
+                                    <span class="btn btn-warning">Stock : {{ promo.stock }}</span>
+                                {% elseif promo.stock<5 and promo.stock>0 %}
+                                    <span class="btn btn-danger">Stock : {{ promo.stock }}</span>
+                                {% else %}
+                                    <span class="btn btn-default">Article épuisé !</span>
+                                {% endif %}
+                                <span class="glyphicon glyphicon-shopping-cart" ></span>
                             </div>
                             <!-- fin caption -->
                         </div>

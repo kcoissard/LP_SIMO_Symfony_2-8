@@ -20,6 +20,22 @@ class ArticleController extends Controller{
                 ->getRepository('VitrineBundle:Article')
                 ->findAll();
         
+        //formulaires d'ajout au panier
+        $formAjoutPanier = [];
+        $tab = array();
+
+        
+        foreach($articles as $article){
+            $form = $this->createFormBuilder($tab, array(
+                'action' => $this->generateUrl('ajoutArticlePanier')
+            ))
+                ->add('id_article', 'hidden')
+                ->add('quantity', 'integer', array("label" => "Quantité", "data" => 1))
+                ->add('submit', 'submit')
+                ->getForm();
+            $formAjoutPanier[$article->getId()] = $form->createView();
+         }
+        
         //formulaire de recherche
         $formulaireRecherche = $this->createForm(new RechercheFiltreArticles());
         $request = $this->getRequest();
@@ -43,6 +59,7 @@ class ArticleController extends Controller{
                 return $this->render('VitrineBundle:Article:index.html.twig', array(
                     'articles' => $liste_articles,
                     'formulaireRecherche' => $formulaireRecherche->createView(),
+                    'formulaires' => $formAjoutPanier,
                         ));
                 }
             }
@@ -62,6 +79,7 @@ class ArticleController extends Controller{
                 array(
                     'articles' => $articles,
                     'formulaireRecherche' => $formulaireRecherche->createView(),
+                    'formulaires' => $formAjoutPanier,
                 ));
         }
     }

@@ -1,6 +1,6 @@
 {% extends "VitrineBundle::layout.html.twig" %}
 
-{% block title %} Accueil {% endblock %}
+{% block title %} Catalogue {% endblock %}
 
 {% block content %}
 
@@ -43,6 +43,16 @@
                             {% endif %}
                             <span class="glyphicon glyphicon-shopping-cart" ></span> <!-- href="article.html" -->
                         </div>
+                        <div>
+                            {{ form_start(formulaires[article.id()], {'attr': {'class': 'form-horizontal'}}) }}
+                                
+                              {{ form_widget(formulaires[article.id()].id_article, {'attr': {'value': article.id()}}) }}
+                              {{ form_widget(formulaires[article.id()].submit, {'attr': {'class': 'btn btn-primary'}, 'label': "Ajouter" }) }}
+
+                              {{ form_rest(formulaires[article.id()]) }}
+
+                           {{ form_end(formulaires[article.id()]) }}
+                        </dIv>
                         <!-- fin caption -->
                     </div>
                     <!-- fin panel-default -->

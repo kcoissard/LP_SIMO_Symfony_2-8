@@ -1,11 +1,10 @@
-#pages statiques
+#pages statiques de base
 vitrine_homepage:
     path:     /accueil/{name}
     defaults: { _controller: VitrineBundle:Default:index, name: visiteur }
 mentions:
     path:     /mentions
     defaults: { _controller: VitrineBundle:Default:mentions}
-
 
 #front sans connexion
 catalogue:
@@ -14,11 +13,12 @@ catalogue:
 promotions:
     path:     /catalogue
     defaults: { _controller: VitrineBundle:Article:promotions}
+#Ici j'ai préféré une récupèration de l'id par "post" plutot qu'un "get", 
+#ce qui est plus proche d'une situation réelle-professionnelle
 articles_par_categorie:
     path:     /catalogue/{id_categorie_article}
     defaults: { _controller: VitrineBundle:Categorie:index }
 
-    
     
 #/connexion/deconnexion/incription
 #connexion:
@@ -34,11 +34,21 @@ articles_par_categorie:
   #  defaults: { _controller: VitrineBundle:Client:inscription }
 
 #front une fois connecté
-#panier:
-    #path:     /panier
-    #defaults: { _controller: VitrineBundle:Panier:panier}
-#...
-
+panier:
+    path:     /panier
+    defaults: { _controller: VitrineBundle:Panier:index}
+panierContenu:
+    path:     /panier/contenuPanier
+    defaults: { _controller: VitrineBundle:Panier:contenuPanier}
+ajoutArticlePanier:
+    path:     /panier/ajoutArticlePanier
+    defaults: { _controller: VitrineBundle:Panier:ajoutArticlePanier}
+suppressionArticlePanier:
+    path:     /panier/suppressionArticlePanier/{id_article}
+    defaults: { _controller: VitrineBundle:Panier:suppressionArticlePanier}
+viderPanier:
+    path:     /panier/viderPanier
+    defaults: { _controller: VitrineBundle:Panier:viderPanier}
 #utils
 #creer_commande:
     #path:     /creer
