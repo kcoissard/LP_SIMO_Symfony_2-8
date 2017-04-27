@@ -50,6 +50,15 @@
                 </div>
                 <!-- fin col-md-9 -->
             </div>
+            <div class='flash_messages'>
+                {% for type, flash_messages in app.session.flashbag %}
+                {% for flashMessage in flash_messages %}
+                    <div id="message_flash" class="row" style="display: display; width: 100%!important; text-align: center;">
+                      <span class="col-md-12 alert alert-{{ type }}">  {{ flashMessage }} </span>
+                    </div>
+                {% endfor %}
+              {% endfor %}
+            </div>
             <!-- fin row -->
         </div>
         <!-- fin content -->

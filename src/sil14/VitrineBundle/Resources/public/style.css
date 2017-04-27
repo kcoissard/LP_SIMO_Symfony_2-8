@@ -68,6 +68,10 @@ div.panier .row table{
     content: "\e116";
     color: darkblue!important;
 }
+
+.recherche_par_categorie form{
+    text-align: center;
+}
 /* Definition des polices personnalisees */
 @font-face {
     font-family: 'Pacifico';

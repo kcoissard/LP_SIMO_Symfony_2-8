@@ -27,7 +27,7 @@
                                   </td>
                                   <td>{{ champs['article'].libelle }}</td>
                                   <td>{{ champs['qte']  }}</td>
-                                  <td>{{ champs['article'].prix * champs['qte'] }}</td>
+                                  <td>{{ champs['article'].prix * champs['qte'] }} €</td>
                                   {% set prix_total=prix_total+champs['article'].prix*champs['qte'] %}
                                   <td>
                                     <a href="{{ path('suppressionArticlePanier', { id_article: champs['article'].getId() }) }}">
@@ -43,15 +43,16 @@
                                 <td>
                                     Total TTC EUR
                                 </td>
-                                <td>
-                                    {{ prix_total }}€
-                                </td>
                                 <td></td>
+                                <td>
+                                    {{ prix_total }} €
+                                </td>
+                                
                                 <td></td>
                             </tr>
                         </table>
                         <div class="boutons_bas_panier">
-                            <a href="#" class="btn btn-primary">Confirmer la commande</a>
+                            <a href="#" class="btn btn-success">Confirmer la commande</a>
                             <a href="{{ path('viderPanier') }}" class="btn btn-danger">Vider le panier</a>
                         </div>
                     </div>
