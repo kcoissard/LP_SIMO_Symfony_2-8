@@ -92,9 +92,24 @@ class ArticleController extends Controller{
         $query=$em->createQuery( 'SELECT a FROM VitrineBundle:Article a WHERE a.promotion=1' );
         $promotions=$query->getResult();
         
+        //formulaires d'ajout au panier
+        $formAjoutPanier = [];
+        $tab = array();
+        foreach($promotions as $promo){
+            $form = $this->createFormBuilder($tab, array(
+                'action' => $this->generateUrl('ajoutArticlePanier')
+            ))
+                ->add('id_article', 'hidden')
+                ->add('quantity', 'integer', array("label" => "Quantité", "data" => 1))
+                ->add('submit', 'submit')
+                ->getForm();
+            $formAjoutPanier[$promo->getId()] = $form->createView();
+         }
+        
        return $this->render('VitrineBundle:Article:promotions.html.twig',
                 array(
                     'promotions' => $promotions,
+                    'formulaires' => $formAjoutPanier,
                 ));
         
     }

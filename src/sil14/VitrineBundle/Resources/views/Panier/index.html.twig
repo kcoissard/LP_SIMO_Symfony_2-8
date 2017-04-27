@@ -12,69 +12,48 @@
                     <div class="row">
                         <table>
                             <tr>
-                                <!--
                                 <th></th>
-                                <th></th>
-                                <th>
-                                    <p>Prix</p>
-                                </th>
-                                <th>
-                                    <p>Quantité</p>
-                                </th>
-                                <th></th>
-                                -->
                                 <th>Produit</th>
-                                <th>Catégorie</th>
+                                <th>Prix</th>
                                 <th>Quantité</th>
-                                <th>Prix total</th>
-                                <th>Supprimer</th>
+                                <th></th>
                             </tr>
                             
+                            {% set prix_total=0 %}
                             {% for champs in articles %}
                                 <tr class="ligne-tableau">
+                                    <td>
+                                      <img src="{{ asset('bundles/vitrine/images/' ~ champs['article'].libelle|lower ~ '.jpg') }}" class="img-circle" alt="{{ champs['article'].libelle }}" />
+                                  </td>
                                   <td>{{ champs['article'].libelle }}</td>
                                   <td>{{ champs['qte']  }}</td>
                                   <td>{{ champs['article'].prix * champs['qte'] }}</td>
+                                  {% set prix_total=prix_total+champs['article'].prix*champs['qte'] %}
                                   <td>
                                     <a href="{{ path('suppressionArticlePanier', { id_article: champs['article'].getId() }) }}">
-                                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                      <span class="btn btn-danger" aria-hidden="true">Supprimer</span>
                                     </a>
                                   </td>
                                 </tr>
                             {% endfor %}
-
-                            <!--
-                            <tr class="ligne-tableau">
-                                <td> <img class="img-circle" src="images/queen.jpg" alt="Coin Queen" /></td>
-                                <td class="panier-libelle">
-                                    <p> La Reine des Eaux </p>
-                                </td>
-                                <td>
-                                    <p> 5,00 </p>
-                                </td>
-                                <td>
-                                    <p>2</p>
-                                </td>
-                                <td>
-                                    <input type="submit" class="btn btn-default btn-submit" value="Supprimer" />
-                                </td>
-                            </tr>
-
+                            
+                            <!-- footer tableau -->
                             <tr>
                                 <td></td>
                                 <td>
-                                    <p style="text-align: right"> Total TTC EUR</p>
+                                    Total TTC EUR
                                 </td>
                                 <td>
-                                    <p> 35,09 </p>
+                                    {{ prix_total }}€
                                 </td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            -->
                         </table>
-                            
-                        <a href="#" class="btn btn-primary">Confirmer la commande</a>
-                        <a href="{{ path('viderPanier') }}" class="btn btn-danger">Vider le panier</a>
-
+                        <div class="boutons_bas_panier">
+                            <a href="#" class="btn btn-primary">Confirmer la commande</a>
+                            <a href="{{ path('viderPanier') }}" class="btn btn-danger">Vider le panier</a>
+                        </div>
                     </div>
                     <!-- fin row -->
                 </div>

@@ -41,13 +41,12 @@
                             {% else %}
                                 <span class="btn btn-default">Article épuisé !</span>
                             {% endif %}
-                            <span class="glyphicon glyphicon-shopping-cart" ></span> <!-- href="article.html" -->
                         </div>
-                        <div>
+                        <div class="form_ajout_panier form_ajout_panier_catalogue">
                             {{ form_start(formulaires[article.id()], {'attr': {'class': 'form-horizontal'}}) }}
                                 
                               {{ form_widget(formulaires[article.id()].id_article, {'attr': {'value': article.id()}}) }}
-                              {{ form_widget(formulaires[article.id()].submit, {'attr': {'class': 'btn btn-primary'}, 'label': "Ajouter" }) }}
+                              {{ form_widget(formulaires[article.id()].submit, {'attr': {'class': 'glyphicon glyphicon-shopping-cart'}, 'label': " " }) }}
 
                               {{ form_rest(formulaires[article.id()]) }}
 

@@ -14,15 +14,47 @@
     color:black;
 }
 
-span.glyphicon.glyphicon-shopping-cart{
+.form_ajout_panier_catalogue .glyphicon.glyphicon-shopping-cart{
     border-radius: 50%;
     border: solid darkblue 2px;
-    height: 27px;
+    height: 30px;
     width: 30px;
     padding-top: 5px;
-    padding-right: 2px;
+    background-color: #FFBE14;
 }
 
+.form_ajout_panier_promo .glyphicon.glyphicon-shopping-cart{
+    border-radius: 50%;
+    border: solid darkblue 2px;
+    height: 30px;
+    width: 30px;
+    padding-top: 5px;
+    background-color: #A40000;
+}
+
+.form_ajout_panier{
+    padding-left: 30%;
+}
+.form_ajout_panier label {
+    display: none;
+}
+.form_ajout_panier div{
+    display: inline-block;
+    width: 20%;
+}
+.form_ajout_panier div input{
+    text-align: center;
+    width: 100%;
+}
+
+div.panier .row table{
+    width:95%;
+}
+
+.boutons_bas_panier{
+    padding-left: 40%;
+    margin: 10px;
+}
 /* Definition des polices personnalisees */
 @font-face {
     font-family: 'Pacifico';
