@@ -6,8 +6,9 @@
             <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/config/routing.yml</file>
             <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/ArticleController.php</file>
             <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/LigneCommandeController.php</file>
-            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/views/Panier/index.html.twig</file>
-            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/CommandeController.php</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Resources/views/layout.html.twig</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/SessionController.php</file>
+            <file>file:/C:/wamp64/www/SIL14-cours-symfony/src/sil14/VitrineBundle/Controller/CategorieController.php</file>
         </group>
     </open-files>
 </project-private>

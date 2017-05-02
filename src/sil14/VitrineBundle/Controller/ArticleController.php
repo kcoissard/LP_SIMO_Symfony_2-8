@@ -125,7 +125,7 @@ class ArticleController extends Controller
 
         $articles = $em->getRepository('VitrineBundle:Article')->findAll();
 
-        return $this->render('article/index.html.twig', array(
+        return $this->render('VitrineBundle:Article:list.html.twig', array(
             'articles' => $articles,
         ));
     }
@@ -148,7 +148,7 @@ class ArticleController extends Controller
             return $this->redirectToRoute('article_show', array('id' => $article->getId()));
         }
 
-        return $this->render('article/new.html.twig', array(
+        return $this->render('VitrineBundle:Article:new.html.twig', array(
             'article' => $article,
             'form' => $form->createView(),
         ));
@@ -162,7 +162,7 @@ class ArticleController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
-        return $this->render('article/show.html.twig', array(
+        return $this->render('VitrineBundle:Article:show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -184,7 +184,7 @@ class ArticleController extends Controller
             return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
         }
 
-        return $this->render('article/edit.html.twig', array(
+        return $this->render('VitrineBundle:Article:edit.html.twig', array(
             'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
