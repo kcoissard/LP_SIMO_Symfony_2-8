@@ -8,17 +8,11 @@
 
 namespace sil14\VitrineBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Response;
-
 /**
- * Description of AdvertController
+ * Description of LigneCommandeController
  *
  * @author Kévin COISSARD
  */
-class AdvertController {
+class LigneCommandeController extends Controller{
     //put your code here
-    public function indexAction()
-    {
-        return new Response("Hello World !");
-    }
 }

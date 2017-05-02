@@ -1,3 +1,15 @@
+#CRUD
+vitrine_client:
+    resource: "@VitrineBundle/Resources/config/routing/client.yml"
+    prefix:   /client
+vitrine_article:
+    resource: "@VitrineBundle/Resources/config/routing/article.yml"
+    prefix:   /article
+vitrine_categorie:
+    resource: "@VitrineBundle/Resources/config/routing/categorie.yml"
+    prefix:   /categorie
+
+
 #pages statiques de base
 vitrine_homepage:
     path:     /accueil/{name}
@@ -13,25 +25,19 @@ catalogue:
 promotions:
     path:     /catalogue
     defaults: { _controller: VitrineBundle:Article:promotions}
-#Ici j'ai préféré une récupèration de l'id par "post" plutot qu'un "get", 
-#ce qui est plus proche d'une situation réelle-professionnelle
 articles_par_categorie:
     path:     /catalogue/{id_categorie_article}
     defaults: { _controller: VitrineBundle:Categorie:index }
 
     
-#/connexion/deconnexion/incription
-#connexion:
- #   path:     /connexion
-  #  defaults: { _controller: VitrineBundle:Client:logIn }
+#/connexion/deconnexion/incription 
+connexion:
+    path:     /connexion
+    defaults: { _controller: VitrineBundle:Session:connexion }
 
-#deconnexion:
- #   path:     /deconnexion
-  #  defaults: { _controller: VitrineBundle:Client:logOut }
-
-#inscription:
- #   path:     /inscription
-  #  defaults: { _controller: VitrineBundle:Client:inscription }
+deconnexion:
+    path:     /deconnexion
+    defaults: { _controller: VitrineBundle:Session:deconnexion }
 
 #front une fois connecté
 panier:
@@ -50,7 +56,8 @@ viderPanier:
     path:     /panier/viderPanier
     defaults: { _controller: VitrineBundle:Panier:viderPanier}
 #utils
-#creer_commande:
-    #path:     /creer
-    #defaults: { _controller: VitrineBundle:Commande:creer}
+creerCommande:
+    path:     /creerCommande
+    defaults: { _controller: VitrineBundle:Commande:creer}
+    
 #...

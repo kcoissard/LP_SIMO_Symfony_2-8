@@ -39,11 +39,10 @@
                             <li>
                                 <a href="/mentions">Mentions légales</a>
                             </li>
-                            <li>
-                                <a href="/panier">Mon Panier</a>
-                            </li>
-
-
+                            
+                            <!-- si utilisateur pas connexté on affiche les boutons connexion/inscription, sinon déconnexion -->
+                            {{ render(controller('VitrineBundle:Session:index')) }} 
+                            
                         </ul>
                     </nav>
                     <!-- fin nav -->

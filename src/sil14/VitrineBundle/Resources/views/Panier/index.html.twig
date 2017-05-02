@@ -52,7 +52,7 @@
                             </tr>
                         </table>
                         <div class="boutons_bas_panier">
-                            <a href="#" class="btn btn-success">Confirmer la commande</a>
+                            <a href="{{ path('creerCommande', {array_articles:articles})}}" class="btn btn-success">Confirmer la commande</a>
                             <a href="{{ path('viderPanier') }}" class="btn btn-danger">Vider le panier</a>
                         </div>
                     </div>

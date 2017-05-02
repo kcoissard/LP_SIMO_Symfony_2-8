@@ -1,0 +1,24 @@
+categorie_index:
+    path:     /list
+    defaults: { _controller: "VitrineBundle:Categorie:list" }
+    methods:  GET
+
+categorie_show:
+    path:     /{id}/show
+    defaults: { _controller: "VitrineBundle:Categorie:show" }
+    methods:  GET
+
+categorie_new:
+    path:     /new
+    defaults: { _controller: "VitrineBundle:Categorie:new" }
+    methods:  [GET, POST]
+
+categorie_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VitrineBundle:Categorie:edit" }
+    methods:  [GET, POST]
+
+categorie_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VitrineBundle:Categorie:delete" }
+    methods:  DELETE
