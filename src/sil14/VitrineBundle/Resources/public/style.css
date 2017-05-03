@@ -72,6 +72,19 @@ div.panier .row table{
 .recherche_par_categorie form{
     text-align: center;
 }
+
+.form_inscription{
+    padding-top: 30px;
+}
+
+.form_inscription label{
+    color: #696969!important;
+    text-shadow: inherit!important;
+}
+
+
+
+
 /* Definition des polices personnalisees */
 @font-face {
     font-family: 'Pacifico';

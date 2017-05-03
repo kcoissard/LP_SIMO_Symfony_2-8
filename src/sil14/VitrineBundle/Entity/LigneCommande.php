@@ -20,9 +20,9 @@ class LigneCommande
     private $quantité;
 
     /**
-     * @var \sil14\VitrineBundle\Entity\Categorie
+     * @var \sil14\VitrineBundle\Entity\Article
      */
-    private $categorie;
+    private $article;
 
 
     /**
@@ -72,26 +72,26 @@ class LigneCommande
     }
 
     /**
-     * Set categorie
+     * Set article
      *
-     * @param \sil14\VitrineBundle\Entity\Categorie $categorie
+     * @param \sil14\VitrineBundle\Entity\Article $article
      * @return LigneCommande
      */
-    public function setCategorie(\sil14\VitrineBundle\Entity\Categorie $categorie = null)
+    public function setArticle(\sil14\VitrineBundle\Entity\Article $article = null)
     {
-        $this->categorie = $categorie;
+        $this->article = $article;
 
         return $this;
     }
 
     /**
-     * Get categorie
+     * Get article
      *
-     * @return \sil14\VitrineBundle\Entity\Categorie 
+     * @return \sil14\VitrineBundle\Entity\Article 
      */
-    public function getCategorie()
+    public function getArticle()
     {
-        return $this->categorie;
+        return $this->article;
     }
     /**
      * @var integer

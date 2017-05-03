@@ -3,9 +3,13 @@
 namespace sil14\VitrineBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use sil14\VitrineBundle\Entity\Panier;
-use Symfony\Component\HttpFoundation\Request;
 
+use sil14\VitrineBundle\Entity\Panier;
+use sil14\VitrineBundle\Entity\Commande;
+use sil14\VitrineBundle\Entity\LigneCommande;
+
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Description of ArticleController
@@ -16,11 +20,7 @@ class PanierController extends Controller{
     
     //action de base
     public function indexAction()
-    {    
-        $article_manager = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('VitrineBundle:Article');
-        
+    {          
         $session = $this->getRequest()->getSession();
         $panier = $session->get('panier', new Panier());
         $articles = array();
@@ -73,10 +73,6 @@ class PanierController extends Controller{
     
     public function contenuPanierAction()
     {
-      $article_manager = $this->getDoctrine()
-              ->getManager()
-              ->getRepository('VitrineBundle:Article');
-      
       $session = $this->getRequest()->getSession();
       $panier = $session->get('panier', new Panier());
       $articles = array();
@@ -202,9 +198,6 @@ class PanierController extends Controller{
         
     }
     
-    
-    
-    
     public function viderPanierAction(){
         $session = $this->getRequest()->getSession();
         $panier = $session->get('panier', new Panier());
@@ -212,6 +205,67 @@ class PanierController extends Controller{
         $session->set('panier', $panier);
         $this->addFlash('success', "Panier vidé avec succès");
         return $this->redirect($this->generateUrl('catalogue'));
+    }
+    
+    
+    private function validerPanierAction(){
+        $session = $this->getRequest()->getSession();
+        $panier = $session->get('panier', new Panier());
+        
+        $articles = array();
+        
+        if(!empty($panier->getContenu())){
+            
+            //créer une commande
+            $idClient=$session->get('id_user');
+            $today = date('d-m-Y');
+            $commande = new Commande();
+            $commande['client_id']=$idClient;
+            $commande['date']=$today;
+            $commande['valide']=0;
+            
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commande);
+            $em->flush($commande);
+            
+            $idCommande=$commande->getId();
+          
+          //créer les ligneCommande à chaque article du panier
+          foreach($panier->getContenu() as $id_article){
+            
+            $article = $this->findArticle($id_article);
+            
+            if($article){
+                
+                $ligneCommande = new ligneCommande();
+            
+                $ligneCommande['article_id']=$article->getId();
+                $ligneCommande['prix']=$article->getPrix();
+                $ligneCommande['quantite']=$article->getQuantite();
+                
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($ligneCommande);
+                $em->flush($ligneCommande);
+            };
+        }
+
+        }else{
+          $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
+          return $this->render('VitrineBundle:Article:index.html.twig', array('articles' => $articles, 'form' => null));
+        }
+        $this->addFlash('success', "Commande acceptée, en attente de validation.");
+        return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
+                array(
+                    'articles' => $articles,
+                    'form' => $form->createView(),
+                    'prix_total' => $prix_total,
+                    ));
+        
+        
+        $this->addFlash('success', "Commande validée");
+        $panier->viderPanier();
+        $session->set('panier', $panier);
     }
     
     
@@ -236,5 +290,7 @@ class PanierController extends Controller{
         return $article;
       }
     }
+    
+    
     
 }

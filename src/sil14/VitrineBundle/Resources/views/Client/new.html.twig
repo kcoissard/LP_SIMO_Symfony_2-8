@@ -1,19 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends "VitrineBundle::layout.html.twig" %}
 
-{% block body %}
-    <h1>Client creation</h1>
+{% block title %} Inscription {% endblock %}
 
-    {{ form_start(form) }}
-        {{ form_widget(form.libelle) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
-    
-
-
-
-    <ul>
-        <li>
-            <a href="{{ path('client_index') }}">Back to the list</a>
-        </li>
-    </ul>
+{% block content %}
+    <div class="col-md-2"></div>
+     <div class="col-md-8">
+        <div class="thumbnail">
+            <div class="panel-default">
+                <div class="panel-heading"> Inscription </div>
+                <div class="caption">
+                    <div class="form_inscription">
+                    {{ form_start(form) }}
+                    <label> Nom : {{ form_widget(form['nom']) }}</label>
+                    <label>Adresse mail : {{ form_widget(form['mail']) }}</label>
+                        <input type="submit" value="S'inscrire" />
+                    {{ form_end(form) }}
+                    
+                    <!-- CONDITION LOG -->
+                    <!--
+                    <div class="boutons_footer_inscription">
+                        <a href="{# path('client_index') #}"></a>
+                    </div>
+                    -->
+                    </div>
+                </div>
 {% endblock %}

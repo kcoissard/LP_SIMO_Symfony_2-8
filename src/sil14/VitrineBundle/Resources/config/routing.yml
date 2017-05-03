@@ -8,6 +8,9 @@ vitrine_article:
 vitrine_categorie:
     resource: "@VitrineBundle/Resources/config/routing/categorie.yml"
     prefix:   /categorie
+vitrine_commande:
+    resource: "@VitrineBundle/Resources/config/routing/commande.yml"
+    prefix:   /commande
 
 
 #pages statiques de base
@@ -55,9 +58,10 @@ suppressionArticlePanier:
 viderPanier:
     path:     /panier/viderPanier
     defaults: { _controller: VitrineBundle:Panier:viderPanier}
-#utils
-creerCommande:
-    path:     /creerCommande
-    defaults: { _controller: VitrineBundle:Commande:creer}
+    
+#commande
+validerPanier:
+    path:     /validerPanier
+    defaults: { _controller: VitrineBundle:Panier:validerPanier}
     
 #...

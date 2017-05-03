@@ -5,6 +5,7 @@ namespace sil14\VitrineBundle\Controller;
 use sil14\VitrineBundle\Entity\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Client controller.
@@ -33,6 +34,7 @@ class ClientController extends Controller
      */
     public function newAction(Request $request)
     {
+
         $client = new Client();
         $form = $this->createForm('sil14\VitrineBundle\Form\ClientType', $client);
         $form->handleRequest($request);
@@ -42,6 +44,10 @@ class ClientController extends Controller
             $em->persist($client);
             $em->flush($client);
 
+            $session = new Session();
+            $session->start();
+            $session->set('id_user', $client->getId());
+        
             return $this->redirectToRoute('client_show', array('id' => $client->getId()));
         }
 
