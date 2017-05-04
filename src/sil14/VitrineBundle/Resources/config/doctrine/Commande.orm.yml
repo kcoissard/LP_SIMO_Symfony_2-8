@@ -18,6 +18,6 @@ sil14\VitrineBundle\Entity\Commande:
                 libelle: client_id
                 referencedColumnName: id
     oneToMany: 
-            ligneCommandes:
-                targetEntity: LigneCommande
-                mappedBy: Commande
+        ligneCommandes:
+            targetEntity: LigneCommande
+            mappedBy: commande

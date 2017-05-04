@@ -20,7 +20,7 @@ class Commande
     private $date;
 
     /**
-     * @var bolean
+     * @var boolean
      */
     private $valide;
 
@@ -78,10 +78,10 @@ class Commande
     /**
      * Set valide
      *
-     * @param \bolean $valide
+     * @param \boolean $valide
      * @return Commande
      */
-    public function setValide(\bolean $valide)
+    public function setValide($valide)
     {
         $this->valide = $valide;
 
@@ -91,7 +91,7 @@ class Commande
     /**
      * Get valide
      *
-     * @return \bolean 
+     * @return \boolean 
      */
     public function getValide()
     {

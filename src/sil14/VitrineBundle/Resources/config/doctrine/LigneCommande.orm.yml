@@ -5,10 +5,6 @@ sil14\VitrineBundle\Entity\LigneCommande:
         id:
             type: integer
             generator: { strategy: AUTO }
-        article:
-            associationKey: true
-        commande:
-            associationKey: true
     fields:
         prix:
             type: decimal
@@ -16,9 +12,15 @@ sil14\VitrineBundle\Entity\LigneCommande:
         quantite:
             type: integer
     manyToOne:
-        categorie:
-            targetEntity: Categorie
-            inversedBy: articles
+        article:
+            targetEntity: Article
+            inversedBy: attributes
             joinColumn:
-                libelle: categorie_id
-                referencedColumnName: id
+              libelle: article_id
+              referencedColumnName: id
+        commande:
+            targetEntity: Commande
+            inversedBy: attributes
+            joinColum:
+              libelle: commande_id
+              referencedColumnName: id

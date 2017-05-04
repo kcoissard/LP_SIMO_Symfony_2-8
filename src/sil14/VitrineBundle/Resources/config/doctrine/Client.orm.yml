@@ -13,6 +13,6 @@ sil14\VitrineBundle\Entity\Client:
             type: string
             length: 100
     oneToMany: 
-            commandes:
-                targetEntity: Commande
-                mappedBy: Client
+        commandes:
+            targetEntity: Commande
+            mappedBy: client

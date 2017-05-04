@@ -26,6 +26,6 @@ sil14\VitrineBundle\Entity\Article:
                 libelle: categorie_id
                 referencedColumnName: id
     oneToMany: 
-            ligneCommande:
-                targetEntity: Article
-                mappedBy: Categorie
+        ligneCommande:
+            targetEntity: Article
+            mappedBy: Article

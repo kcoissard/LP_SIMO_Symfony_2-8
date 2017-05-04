@@ -23,6 +23,11 @@ class LigneCommande
      * @var \sil14\VitrineBundle\Entity\Article
      */
     private $article;
+    
+    /**
+     * @var \sil14\VitrineBundle\Entity\Commande
+     */
+    private $commande;
 
 
     /**
@@ -93,6 +98,34 @@ class LigneCommande
     {
         return $this->article;
     }
+    
+    
+    /**
+     * Set commande
+     *
+     * @param \sil14\VitrineBundle\Entity\Commande $commande
+     * @return LigneCommande
+     */
+    public function setCommande(\sil14\VitrineBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \sil14\VitrineBundle\Entity\Commande 
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    
+    
+    
     /**
      * @var integer
      */

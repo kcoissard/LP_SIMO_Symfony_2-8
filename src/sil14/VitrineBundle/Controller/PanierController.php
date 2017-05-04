@@ -10,6 +10,7 @@ use sil14\VitrineBundle\Entity\LigneCommande;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Description of ArticleController
@@ -64,7 +65,7 @@ class PanierController extends Controller{
                 array(
                     'articles' => $articles,
                     'form' => $form->createView(),
-                    'prix_total' => $prix_total,
+                    'prixtotal' => $prix_total,
                     ));
     }
     
@@ -208,7 +209,7 @@ class PanierController extends Controller{
     }
     
     
-    private function validerPanierAction(){
+    public function confirmationPanierAction(){
         $session = $this->getRequest()->getSession();
         $panier = $session->get('panier', new Panier());
         
@@ -218,54 +219,52 @@ class PanierController extends Controller{
             
             //créer une commande
             $idClient=$session->get('id_user');
-            $today = date('d-m-Y');
+            $repositoryClient = $this->getDoctrine()->getRepository('VitrineBundle:Client');
+            $client = $repositoryClient->find($idClient);
+
+            
+            $today = new \DateTime('now');
             $commande = new Commande();
-            $commande['client_id']=$idClient;
-            $commande['date']=$today;
-            $commande['valide']=0;
+            $commande->setClient($client);
+            $commande->setDate($today);
+            $commande->setValide(false);
             
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($commande);
             $em->flush($commande);
             
-            $idCommande=$commande->getId();
-          
           //créer les ligneCommande à chaque article du panier
-          foreach($panier->getContenu() as $id_article){
+          foreach($panier->getContenu() as $id_article => $qte){
             
             $article = $this->findArticle($id_article);
             
-            if($article){
-                
-                $ligneCommande = new ligneCommande();
-            
-                $ligneCommande['article_id']=$article->getId();
-                $ligneCommande['prix']=$article->getPrix();
-                $ligneCommande['quantite']=$article->getQuantite();
-                
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($ligneCommande);
-                $em->flush($ligneCommande);
-            };
-        }
+                if($article && !is_null($qte)){
 
+                    $ligneCommande = new ligneCommande();
+                    $ligneCommande->setArticle($article);
+                    $ligneCommande->setCommande($commande);
+                    $ligneCommande->setPrix($article->getPrix());
+                    $ligneCommande->setQuantité($qte);
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($ligneCommande);
+                    $em->flush($ligneCommande);
+                }
+            }
         }else{
           $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
           return $this->render('VitrineBundle:Article:index.html.twig', array('articles' => $articles, 'form' => null));
         }
-        $this->addFlash('success', "Commande acceptée, en attente de validation.");
-        return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
-                array(
-                    'articles' => $articles,
-                    'form' => $form->createView(),
-                    'prix_total' => $prix_total,
-                    ));
-        
         
         $this->addFlash('success', "Commande validée");
         $panier->viderPanier();
         $session->set('panier', $panier);
+        
+        return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
+                array(
+                    'articles' => $articles,
+                    ));
     }
     
     

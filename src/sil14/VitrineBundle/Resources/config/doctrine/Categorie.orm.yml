@@ -12,6 +12,6 @@ sil14\VitrineBundle\Entity\Categorie:
         description:
             type: text
     oneToMany: 
-            articles:
-                targetEntity: Article
-                mappedBy: Categorie
+        articles:
+            targetEntity: Article
+            mappedBy: Categorie

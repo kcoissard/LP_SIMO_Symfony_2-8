@@ -20,9 +20,14 @@ class LigneCommande
     private $quantité;
 
     /**
-     * @var \sil14\VitrineBundle\Entity\Categorie
+     * @var \sil14\VitrineBundle\Entity\Article
      */
-    private $categorie;
+    private $article;
+    
+    /**
+     * @var \sil14\VitrineBundle\Entity\Commande
+     */
+    private $commande;
 
 
     /**
@@ -72,27 +77,55 @@ class LigneCommande
     }
 
     /**
-     * Set categorie
+     * Set article
      *
-     * @param \sil14\VitrineBundle\Entity\Categorie $categorie
+     * @param \sil14\VitrineBundle\Entity\Article $article
      * @return LigneCommande
      */
-    public function setCategorie(\sil14\VitrineBundle\Entity\Categorie $categorie = null)
+    public function setArticle(\sil14\VitrineBundle\Entity\Article $article = null)
     {
-        $this->categorie = $categorie;
+        $this->article = $article;
 
         return $this;
     }
 
     /**
-     * Get categorie
+     * Get article
      *
-     * @return \sil14\VitrineBundle\Entity\Categorie 
+     * @return \sil14\VitrineBundle\Entity\Article 
      */
-    public function getCategorie()
+    public function getArticle()
     {
-        return $this->categorie;
+        return $this->article;
     }
+    
+    
+    /**
+     * Set commande
+     *
+     * @param \sil14\VitrineBundle\Entity\Commande $commande
+     * @return LigneCommande
+     */
+    public function setCommande(\sil14\VitrineBundle\Entity\Commande $commande = null)
+    {
+        $this->commande = $commande;
+
+        return $this;
+    }
+
+    /**
+     * Get commande
+     *
+     * @return \sil14\VitrineBundle\Entity\Commande 
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    
+    
+    
     /**
      * @var integer
      */
@@ -107,5 +140,33 @@ class LigneCommande
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * @var integer
+     */
+    private $quantite;
+
+
+    /**
+     * Set quantite
+     *
+     * @param integer $quantite
+     * @return LigneCommande
+     */
+    public function setQuantite($quantite)
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    /**
+     * Get quantite
+     *
+     * @return integer 
+     */
+    public function getQuantite()
+    {
+        return $this->quantite;
     }
 }

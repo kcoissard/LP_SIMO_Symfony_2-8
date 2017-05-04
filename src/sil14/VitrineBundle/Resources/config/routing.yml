@@ -58,10 +58,8 @@ suppressionArticlePanier:
 viderPanier:
     path:     /panier/viderPanier
     defaults: { _controller: VitrineBundle:Panier:viderPanier}
-    
-#commande
-validerPanier:
-    path:     /validerPanier
-    defaults: { _controller: VitrineBundle:Panier:validerPanier}
+confirmationPanier:
+    path:     /panier/confirmationPanier
+    defaults: { _controller: VitrineBundle:Panier:confirmationPanier}
     
 #...
