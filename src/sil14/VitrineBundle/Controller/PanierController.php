@@ -254,10 +254,7 @@ class PanierController extends Controller{
         
             $this->addFlash('success', "Commande validée");
             $panier->viderPanier();
-            return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
-                    array(
-                        'articles' => $articles,
-                        ));
+            return $this->forward('VitrineBundle:Commande:listeCommandes');
         }
     
         $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");

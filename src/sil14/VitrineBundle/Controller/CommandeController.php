@@ -137,18 +137,17 @@ class CommandeController extends Controller
                 if(!empty($liste_commandes)){
                     
                     $renderArrayCommandes= array();
-                    $renderArrayLignesCommande= array();
                     $compteur=0;
                     
                     foreach($liste_commandes as $commande){
-                        $renderArrayCommandes[$compteur]['id_commande']=$commande->getId();
+                        $renderArrayCommandes[$compteur]['infos']['id_commande']=$commande->getId();
                         
                         //au cas où il n'y ait pas de lignes
-                        $renderArrayCommandes[$compteur]['vide']=FALSE;
+                        $renderArrayCommandes[$compteur]['infos']['vide']=FALSE;
                         
                         //date et état
-                        $renderArrayCommandes[$compteur]['date']=$commande->getDate()->format('d-m-Y');
-                        $renderArrayCommandes[$compteur]['etat']=$commande->getValide();
+                        $renderArrayCommandes[$compteur]['infos']['date']=$commande->getDate()->format('d/m/Y');
+                        $renderArrayCommandes[$compteur]['infos']['etat']=$commande->getValide();
                         
                         //on récupère les lignes
                         $lignes_commande = $em->getRepository('VitrineBundle:ligneCommande')->findByCommande($commande->getId());
@@ -160,7 +159,7 @@ class CommandeController extends Controller
                                //on récupère l'intitulé de l'article
                                $articleLigne=$ligne->getArticle();
 
-                               $renderArrayLignesCommande[$compteur][$compteurLigne]=array(
+                               $renderArrayCommandes[$compteur]['lignes'][$compteurLigne]=array(
                                    'article' => $articleLigne->getLibelle(),
                                    'prix'    => $ligne->getPrix(),
                                    'quantite'=> $ligne->getQuantite(),
@@ -169,7 +168,7 @@ class CommandeController extends Controller
                                $compteurLigne++;
                             }
                         }else{
-                            $renderArrayCommandes[$compteur]['vide']=TRUE;
+                            $renderArrayCommandes[$compteur]['infos']['vide']=TRUE;
                         }
                         
                     $compteur++;
@@ -177,7 +176,6 @@ class CommandeController extends Controller
              return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
                 array(
                     'commandes' => $renderArrayCommandes,
-                    'lignescommande' => $renderArrayLignesCommande,
                     ));
         }
     }

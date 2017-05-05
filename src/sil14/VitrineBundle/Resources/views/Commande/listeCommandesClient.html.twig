@@ -4,35 +4,60 @@
 
 {% block content %}
     <div class="content">
-        
         {% set compteurCommande=0 %}
         
-        {% for commande in lignescommande %}
+        {% for commande in commandes %}
          
-        <div class="thumbnail commandes">
+        <div class="thumbnail panier commandes">
             <div class="panel-default">
-                <div class="panel-heading"> Commande numéro {# commande['id_commande'] #}</div>
+                
+                <div class="panel-heading"> Commande n°{{ commande['infos']['id_commande'] }} passée le {{ commande['infos']['date'] }}
+                    - État : {% if commande['infos']['etat']==FALSE %}
+                                Non traitée
+                             {% else %}
+                                Validée
+                             {% endif %}
+                </div>
                     <div class="panel-body">
                         <div class="row">
-                            {# if commande['vide']==FALSE #}
+                            {% if commande['infos']['vide']==FALSE %}
+                                <table>
+                                    <tr>
+                                        <th></th>
+                                        <th>Produit</th>
+                                        <th>Quantité</th>
+                                        <th>Prix</th>
+                                    </tr>
                                     
                                     {% set compteurLignes=0 %}
-                                    
-                                    {% for ligne in commande %}
+                                    {% set prix_total_commande=0 %}
+                                    {% for ligne in commande['lignes'] %}
                                         
                                         
-                                        <p>toto debug :{{ dump(commande[compteurLignes].article) }}</p>
+
+                                            
+                                                <tr class="ligne-tableau">
+                                                  <td>
+                                                    <img src="{{ asset('bundles/vitrine/images/' ~ ligne.article|lower ~ '.jpg') }}" class="img-circle" alt="{{ ligne.article }}" />
+                                                  </td>
+                                                  <td>{{ ligne.article }}</td>
+                                                  <td>{{ ligne.quantite  }}</td>
+                                                  <td>{{ ligne.prix }} € </td>
+                                                  {% set prix_total_commande=prix_total_commande+ligne.prix %}
+                                                </tr>
+                                        
+                                        
                                         {% set compteurLignes=compteurLignes+1 %}
                                     {% endfor %}
-                                    <p>toto compteurLignes :{{ dump(compteurLignes) }}</p>
-                            {# else #}
-                                <!-- <div class="commande_vide">Cette commande est vide !</div> --> 
-                            {# endif #}
+                                    </table>
+                                    <div class="footer_liste_commandes">Prix total TTC :  {{ prix_total_commande }} €</div>
+                            {% else %}
+                                <div class="commande_vide">Cette commande est vide !</div>
+                            {% endif %}
                         </div>
                         <!-- fin row -->
                 </div>
                 <!-- fin panel-body -->
-                <div class="panel-heading"> Prix total </div>
             </div>
             <!-- din panel-default -->
         </div>
