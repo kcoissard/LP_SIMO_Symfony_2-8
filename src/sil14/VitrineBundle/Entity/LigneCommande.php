@@ -15,11 +15,6 @@ class LigneCommande
     private $prix;
 
     /**
-     * @var integer
-     */
-    private $quantité;
-
-    /**
      * @var \sil14\VitrineBundle\Entity\Article
      */
     private $article;
@@ -51,29 +46,6 @@ class LigneCommande
     public function getPrix()
     {
         return $this->prix;
-    }
-
-    /**
-     * Set quantité
-     *
-     * @param integer $quantité
-     * @return LigneCommande
-     */
-    public function setQuantité($quantité)
-    {
-        $this->quantité = $quantité;
-
-        return $this;
-    }
-
-    /**
-     * Get quantité
-     *
-     * @return integer 
-     */
-    public function getQuantité()
-    {
-        return $this->quantité;
     }
 
     /**

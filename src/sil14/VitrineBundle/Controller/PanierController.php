@@ -236,21 +236,19 @@ class PanierController extends Controller{
             
           //créer les ligneCommande à chaque article du panier
           foreach($panier->getContenu() as $id_article => $qte){
-            
             $article = $this->findArticle($id_article);
-            
                 if($article && !is_null($qte)){
-
+                    
                     $ligneCommande = new ligneCommande();
                     $ligneCommande->setArticle($article);
                     $ligneCommande->setCommande($commande);
                     $ligneCommande->setPrix($article->getPrix());
-                    $ligneCommande->setQuantité($qte);
+                    $ligneCommande->setQuantite(intval($qte));
 
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($ligneCommande);
-                    $em->flush($ligneCommande);
-                }
+                }                    
+                $em->flush($ligneCommande);
             }
         }else{
           $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
@@ -259,8 +257,6 @@ class PanierController extends Controller{
         
         $this->addFlash('success', "Commande validée");
         $panier->viderPanier();
-        $session->set('panier', $panier);
-        
         return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
                 array(
                     'articles' => $articles,

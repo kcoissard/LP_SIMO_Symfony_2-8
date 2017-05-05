@@ -44,8 +44,9 @@ class ClientController extends Controller
             $em->persist($client);
             $em->flush($client);
 
-            $session = new Session();
-            $session->start();
+            //$session = new Session();
+            //$session->start();
+            $session = $request->getSession();
             $session->set('id_user', $client->getId());
         
             return $this->redirectToRoute('client_show', array('id' => $client->getId()));
