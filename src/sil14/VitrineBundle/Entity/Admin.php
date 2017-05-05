@@ -3,38 +3,21 @@
 namespace sil14\VitrineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Client
+ * Admin
+ *
+ * @ORM\Table(name="admin")
+ * @ORM\Entity(repositoryClass="sil14\VitrineBundle\Repository\AdminRepository")
  */
-class Client implements UserInterface, \Serializable 
+class Admin
 {
-    public function eraseCredentials(){
-        // Rien
-    }
-    public function getUsername() {
-        return $this->mail;
-    }
-    public function serialize() {
-        return serialize(array($this->id));
-    }
-
-    public function unserialize($serialized) {
-        list ($this->id) = unserialize($serialized);
-    }
-    public function getSalt() {
-        return null;
-    }
-    public function getRoles() {
-      if ($this->is_admin)
-        return array('ROLE_ADMIN');
-      else
-        return array('ROLE_CLIENT');
-    }
-    
     /**
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
@@ -52,11 +35,6 @@ class Client implements UserInterface, \Serializable
      * @var string
      */
     private $password;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $commandes;
 
     /**
      * Constructor
@@ -121,45 +99,12 @@ class Client implements UserInterface, \Serializable
     {
         return $this->mail;
     }
-
-    /**
-     * Add commandes
-     *
-     * @param \sil14\VitrineBundle\Entity\Commande $commandes
-     * @return Client
-     */
-    public function addCommande(\sil14\VitrineBundle\Entity\Commande $commandes)
-    {
-        $this->commandes[] = $commandes;
-
-        return $this;
-    }
-
-    /**
-     * Remove commandes
-     *
-     * @param \sil14\VitrineBundle\Entity\Commande $commandes
-     */
-    public function removeCommande(\sil14\VitrineBundle\Entity\Commande $commandes)
-    {
-        $this->commandes->removeElement($commandes);
-    }
-
-    /**
-     * Get commandes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCommandes()
-    {
-        return $this->commandes;
-    }
     
     /**
      * Set password
      *
      * @param string $password
-     * @return Client
+     * @return Admin
      */
     public function setPassword($password)
     {

@@ -1,0 +1,26 @@
+{% extends "VitrineBundle::layout.html.twig" %}
+
+{% block title %} Mon panier {% endblock %}
+
+{% block content %}
+
+    <div class="content">
+        <div class="thumbnail panier ">
+            <div class="panel-default">
+                <div class="panel-heading"> Error </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class='error_message'>404 : La page n'éxiste pas !</div>
+                        <a href="{{ path('vitrine_homepage') }}" class="btn btn-default">Retour au site</a>
+                    </div>
+                    <!-- fin row -->
+                </div>
+                <!-- fin panel-body -->
+            </div>
+            <!-- din panel-default -->
+        </div>
+        <!-- din thumbnail -->
+    </div>
+    <!-- fin content-->
+    
+{% endblock %}

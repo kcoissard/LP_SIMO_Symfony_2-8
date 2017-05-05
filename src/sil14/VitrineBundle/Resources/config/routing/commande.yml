@@ -1,6 +1,6 @@
 commande_index:
     path:     /
-    defaults: { _controller: "VitrineBundle:Commande:index" }
+    defaults: { _controller: "VitrineBundle:Commande:listeCommandes" }
     methods:  GET
 
 commande_show:
@@ -23,7 +23,3 @@ commande_delete:
     defaults: { _controller: "VitrineBundle:Commande:delete" }
     methods:  DELETE
 
-liste_commandes:
-    path:     /listeCommandes
-    defaults: { _controller: "VitrineBundle:Commande:listeCommandes" }
-    methods:  GET

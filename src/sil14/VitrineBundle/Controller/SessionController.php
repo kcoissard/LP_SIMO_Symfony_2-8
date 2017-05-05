@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 
 /**
- * Description of SessionController
+ * CONTROLLER UNIQUEMENT POUR LES MENUSs
  *
  * @author Kévin COISSARD
  */
@@ -21,20 +21,14 @@ class SessionController extends Controller{
     
     //action de base
     public function indexAction(){
-        //if user connecté --> on affiche le bouton déconnexion
-        //return $this->render('VitrineBundle:Menu:menuDeconnexion.html.twig');
-
-        //else -> on affiche le bouton connexion + inscription
-        return $this->render('VitrineBundle:Menu:menuConnexion.html.twig');
-    }
-    
-    //action de base
-    public function connexionAction(){
-        
-    }
-    
-    //action de base
-    public function deconnexionAction(){
+        $session = $this->getRequest()->getSession();
+        if(!is_null($session->get('id_user'))){
+            //if user connecté --> on affiche le bouton déconnexion
+            return $this->render('VitrineBundle:Menu:menuDeconnexion.html.twig');
+        }else{
+            //else -> on affiche le bouton connexion + inscription
+            return $this->render('VitrineBundle:Menu:menuConnexion.html.twig');
+        }
         
     }
 }

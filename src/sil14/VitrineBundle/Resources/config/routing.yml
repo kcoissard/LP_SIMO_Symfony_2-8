@@ -1,16 +1,25 @@
 #CRUD
 vitrine_client:
     resource: "@VitrineBundle/Resources/config/routing/client.yml"
-    prefix:   /client
+    prefix:   /admin/client
 vitrine_article:
     resource: "@VitrineBundle/Resources/config/routing/article.yml"
-    prefix:   /article
+    prefix:   /admin/article
 vitrine_categorie:
     resource: "@VitrineBundle/Resources/config/routing/categorie.yml"
-    prefix:   /categorie
+    prefix:   /admin/categorie
 vitrine_commande:
     resource: "@VitrineBundle/Resources/config/routing/commande.yml"
-    prefix:   /commande
+    prefix:   /admin/commande
+vitrine_admin:
+    resource: "@VitrineBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
+    
+#exceptions admin
+liste_commandes:
+    path:     /listeCommandes
+    defaults: { _controller: "VitrineBundle:Commande:listeCommandes" }
+    methods:  GET
 
 
 #pages statiques de base
@@ -34,13 +43,23 @@ articles_par_categorie:
 
     
 #/connexion/deconnexion/incription 
-connexion:
-    path:     /connexion
-    defaults: { _controller: VitrineBundle:Session:connexion }
+login:
+    path:     /login
+    defaults: { _controller: VitrineBundle:Client:login }
+login_check: 
+    pattern:   /login_check 
 
-deconnexion:
-    path:     /deconnexion
-    defaults: { _controller: VitrineBundle:Session:deconnexion }
+logout:
+    path:     /logout
+    defaults: { _controller: VitrineBundle:Client:logout }
+    #pattern:   /logout
+    
+inscription:
+    path:     /inscription
+    defaults: { _controller: VitrineBundle:Client:new }
+    methods:  [GET, POST]
+    
+
 
 #front une fois connecté
 panier:

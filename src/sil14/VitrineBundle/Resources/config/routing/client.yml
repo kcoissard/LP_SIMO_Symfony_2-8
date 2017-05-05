@@ -8,10 +8,10 @@ client_show:
     defaults: { _controller: "VitrineBundle:Client:show" }
     methods:  GET
 
-client_new:
-    path:     /new
-    defaults: { _controller: "VitrineBundle:Client:new" }
-    methods:  [GET, POST]
+#client_new:
+    #path:     /new
+    #defaults: { _controller: "VitrineBundle:Client:new" }
+    #methods:  [GET, POST]
 
 client_edit:
     path:     /{id}/edit

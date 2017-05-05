@@ -1,6 +1,6 @@
-sil14\VitrineBundle\Entity\Client:
+sil14\VitrineBundle\Entity\Admin:
     type: entity
-    table: client
+    table: admin
     id:
         id:
             type: integer
@@ -15,7 +15,3 @@ sil14\VitrineBundle\Entity\Client:
         password:
             type: string
             length: 30
-    oneToMany: 
-        commandes:
-            targetEntity: Commande
-            mappedBy: client

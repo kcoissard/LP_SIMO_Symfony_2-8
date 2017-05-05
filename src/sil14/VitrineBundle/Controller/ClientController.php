@@ -41,15 +41,32 @@ class ClientController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($client);
-            $em->flush($client);
+            
+            //verif user pas éxistant
+            if($this->getCustomerByMail($client->getMail())){
+                $this->addFlash('danger', "Un compte existe déjà avec cette adresse email");
+                return $this->redirectToRoute('client_new');
+            } else {
+                
+                //NE FONCTIONNE PAS - à modif
+                //$encoder=$this->container->get('security.password_encoder'); 
+                // On récupère l'encodeur défini dans security.yml
+                //$encoded=$encoder->encodePassword($client,$client->getPassword());
+                // On encode le mot de passe issu du formulaire 
+                //$client->setPassword($encoded);
+                
+                
+                $em->persist($client);
+                $em->flush($client);
 
-            //$session = new Session();
-            //$session->start();
-            $session = $request->getSession();
-            $session->set('id_user', $client->getId());
-        
-            return $this->redirectToRoute('client_show', array('id' => $client->getId()));
+                //$session = new Session();
+                //$session->start();
+                $session = $request->getSession();
+                $session->set('id_user', $client->getId());
+                
+                $this->addFlash('success', "Compte créé, bienvenue !");
+                return $this->forward('VitrineBundle:Article:index');
+            }
         }
 
         return $this->render('VitrineBundle:Client:new.html.twig', array(
@@ -127,5 +144,53 @@ class ClientController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    public function loginAction(Request $request){
+      $client = new Client();
+      
+      $form = $this->createFormBuilder($client)
+         ->add('mail', 'text')
+         ->add('password', 'password')
+         ->add('submit', 'submit')
+         ->getForm();
+
+      $form->handleRequest($request);
+
+     if ($form->isSubmitted() && $form->isValid()) {
+         $connexion_client = $form->getData();
+         $em = $this->getDoctrine()->getManager();
+         $client = $this->getCustomerByMail($connexion_client->getMail());
+         if($client){
+            if($client->getPassword() == $connexion_client->getPassword()){
+              $this->createSession($client);
+              $this->addFlash('success', "Connexion réussie");
+              $session = $request->getSession();
+              $session->set('id_user', $client->getId());  
+              return $this->forward('VitrineBundle:Article:index');
+            }
+         }
+         $this->addFlash('danger', "Identifiants incorrects, veuillez réssayer");
+     }
+      
+      return $this->render('VitrineBundle:pages:connexion.html.twig', array('customer' => $client, 'form' => $form->createView()));
+    }
+
+    
+    //fonctions utiles
+    private function createSession($client) {
+      $session = $this->getRequest()->getSession();
+      $session->set('id_user', $client->getId());
+    }
+    private function getCustomerByMail($mail){
+      $em = $this->getDoctrine()->getManager();
+      $client = $em->getRepository('VitrineBundle:Client')->findOneByMail($mail);
+      return $client;
+    }
+    public function logoutAction(Request $request){
+        $session = $request->getSession();
+        $session->remove('id_user');
+        $this->addFlash('success', "Deconnexion réussie");
+        return $this->forward('VitrineBundle:Article:index');
     }
 }

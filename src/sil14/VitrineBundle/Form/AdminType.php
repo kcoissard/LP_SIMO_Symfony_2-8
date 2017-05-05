@@ -6,14 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientType extends AbstractType
+class AdminType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nom', 'text')->add('mail', 'text')->add('password', 'password');
+        $builder->add('nom')->add('mail')->add('password')        ;
     }
     
     /**
@@ -22,7 +22,7 @@ class ClientType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'sil14\VitrineBundle\Entity\Client'
+            'data_class' => 'sil14\VitrineBundle\Entity\Admin'
         ));
     }
 
@@ -31,7 +31,7 @@ class ClientType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sil14_vitrinebundle_client';
+        return 'sil14_vitrinebundle_admin';
     }
 
 

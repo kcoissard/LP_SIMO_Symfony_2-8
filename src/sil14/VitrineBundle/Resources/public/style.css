@@ -92,6 +92,10 @@ div.panier .row table{
     padding-left: 20px;
 }
 
+formulaire_filtrage_articles ul{
+    display:none!important;
+}
+
 /* Definition des polices personnalisees */
 @font-face {
     font-family: 'Pacifico';
