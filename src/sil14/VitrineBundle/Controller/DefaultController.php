@@ -18,4 +18,8 @@ class DefaultController extends Controller
     {
         return $this->render('VitrineBundle:pages:mentions.html.twig');
     }
+    
+    public function backofficeProvisoirAction(){
+        return $this->render('VitrineBundle:Default:backofficeProvisoir.html.twig');
+    }
 }

@@ -7,7 +7,7 @@ vitrine_article:
     prefix:   /admin/article
 vitrine_categorie:
     resource: "@VitrineBundle/Resources/config/routing/categorie.yml"
-    prefix:   /admin/categorie
+    prefix:   /admin/categorie    
 vitrine_commande:
     resource: "@VitrineBundle/Resources/config/routing/commande.yml"
     prefix:   /admin/commande
@@ -48,18 +48,15 @@ login:
     defaults: { _controller: VitrineBundle:Client:login }
 login_check: 
     pattern:   /login_check 
-
 logout:
     path:     /logout
     defaults: { _controller: VitrineBundle:Client:logout }
-    #pattern:   /logout
-    
+    #pattern:   /logout   
 inscription:
     path:     /inscription
     defaults: { _controller: VitrineBundle:Client:new }
     methods:  [GET, POST]
     
-
 
 #front une fois connecté
 panier:
@@ -81,3 +78,8 @@ confirmationPanier:
     path:     /panier/confirmationPanier
     defaults: { _controller: VitrineBundle:Panier:confirmationPanier}
     
+    
+#a finir plus tard
+backofficeProvisoir:
+    path:     /backofficeProvisoir
+    defaults: { _controller: VitrineBundle:Default:backofficeProvisoir}

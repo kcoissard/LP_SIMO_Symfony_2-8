@@ -211,54 +211,61 @@ class PanierController extends Controller{
     
     public function confirmationPanierAction(){
         $session = $this->getRequest()->getSession();
-        $panier = $session->get('panier', new Panier());
+        if(!is_null($session->get('id_user'))){
         
-        $articles = array();
-        
-        if(!empty($panier->getContenu())){
-            
-            //créer une commande
-            $idClient=$session->get('id_user');
-            $repositoryClient = $this->getDoctrine()->getRepository('VitrineBundle:Client');
-            $client = $repositoryClient->find($idClient);
+            $panier = $session->get('panier', new Panier());
 
-            
-            $today = new \DateTime('now');
-            $commande = new Commande();
-            $commande->setClient($client);
-            $commande->setDate($today);
-            $commande->setValide(false);
-            
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($commande);
-            $em->flush($commande);
-            
-          //créer les ligneCommande à chaque article du panier
-          foreach($panier->getContenu() as $id_article => $qte){
-            $article = $this->findArticle($id_article);
-                if($article && !is_null($qte)){
-                    
-                    $ligneCommande = new ligneCommande();
-                    $ligneCommande->setArticle($article);
-                    $ligneCommande->setCommande($commande);
-                    $ligneCommande->setPrix($article->getPrix());
-                    $ligneCommande->setQuantite(intval($qte));
+            $articles = array();
 
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($ligneCommande);
-                }                    
-                $em->flush($ligneCommande);
-            }
-        
-        
-            $this->addFlash('success', "Commande validée");
-            $panier->viderPanier();
-            return $this->forward('VitrineBundle:Commande:listeCommandes');
+            if(!empty($panier->getContenu())){
+
+                //créer une commande
+                $idClient=$session->get('id_user');
+                $repositoryClient = $this->getDoctrine()->getRepository('VitrineBundle:Client');
+                $client = $repositoryClient->find($idClient);
+
+
+                $today = new \DateTime('now');
+                $commande = new Commande();
+                $commande->setClient($client);
+                $commande->setDate($today);
+                $commande->setValide(false);
+
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($commande);
+                $em->flush($commande);
+
+              //créer les ligneCommande à chaque article du panier
+              foreach($panier->getContenu() as $id_article => $qte){
+                $article = $this->findArticle($id_article);
+                    if($article && !is_null($qte)){
+
+                        $ligneCommande = new ligneCommande();
+                        $ligneCommande->setArticle($article);
+                        $ligneCommande->setCommande($commande);
+                        $ligneCommande->setPrix($article->getPrix());
+                        $ligneCommande->setQuantite(intval($qte));
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($ligneCommande);
+                    }                    
+                    $em->flush($ligneCommande);
+                }
+
+
+                $this->addFlash('success', "Commande validée");
+                $panier->viderPanier();
+                return $this->forward('VitrineBundle:Commande:listeCommandes');
+                
         }
     
         $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
         return $this->forward('VitrineBundle:Article:index');
+        }
+        //autres cas
+          $this->addFlash('danger', "Vous n'êtes pas connecté.");
+          return $this->forward('VitrineBundle:Article:index');
     }
     
     

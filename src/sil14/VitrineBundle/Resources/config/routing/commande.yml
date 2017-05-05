@@ -23,3 +23,7 @@ commande_delete:
     defaults: { _controller: "VitrineBundle:Commande:delete" }
     methods:  DELETE
 
+commande_list:
+    path:     /list
+    defaults: { _controller: "VitrineBundle:Commande:index" }
+    methods:  GET

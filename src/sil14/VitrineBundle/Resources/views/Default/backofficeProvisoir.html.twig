@@ -1,0 +1,61 @@
+{% extends "VitrineBundle::layout.html.twig" %}
+
+{% block title %} Accueil {% endblock %}
+
+{% block content %}
+
+<section>
+     <div class="content">
+        <div class="thumbnail panier ">
+            <div class="panel-default">
+                <div class="panel-heading"> Accès ADMIN </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <ul>
+                            
+                            <li>
+                                <a href="{{ path('article_index') }}">
+                                    Accès liste articles
+                                </a>
+                            </li> 
+                            
+                            <li>
+                                <a href="{{ path('categorie_index') }}">
+                                    Accès liste catégories
+                                </a>
+                            </li> 
+                            
+                            <li>
+                                <a href="{{ path('client_index') }}">
+                                    Accès liste comptes clients
+                                </a>
+                            </li> 
+                            
+                            <li>
+                                <a href="{{ path('commande_list') }}">
+                                    Accès liste commandes
+                                </a>
+                            </li> 
+                            
+                            <li>
+                                <a href="{{ path('admin_index') }}">
+                                    Accès liste comptes admins
+                                </a>
+                            </li> 
+                    
+                        </ul>
+
+                    </div>
+                    <!-- fin row -->
+                </div>
+                <!-- fin panel-body -->
+            </div>
+            <!-- din panel-default -->
+        </div>
+        <!-- din thumbnail -->
+    </div>
+    <!-- fin content-->
+
+</section>
+    
+{% endblock %}

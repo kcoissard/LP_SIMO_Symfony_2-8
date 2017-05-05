@@ -27,5 +27,6 @@ security:
             security: false
     access_denied_url: /refus
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        # A REMETTRE QUAND LA CLASSE ADMIN SERA TERMINEE, en attendant les user connectés peuvent gérer le back office
+        #- { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/client, roles: ROLE_CUSTOMER }
