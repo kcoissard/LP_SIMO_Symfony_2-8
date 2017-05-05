@@ -15,10 +15,12 @@
                                 </a>
 
                             <div class="caption">
-                                <del> {{ promo.prix }} </del>
-                                {% set prix_gonfle=promo.prix %}
-                                {% set prix_gonfle=prix_gonfle+(promo.prix*0.2) %}
-                                {{ prix_gonfle }} €
+                                <del> 
+                                    {% set prix_gonfle=promo.prix %}
+                                    {% set prix_gonfle=prix_gonfle+(promo.prix*0.2) %}
+                                    {{ prix_gonfle }} € 
+                                </del>
+                                
                                 <h2> {{ promo.prix }} €</h2>
                                 <p> {{ promo.description }} </p>
                                 {% if promo.stock>8 %}

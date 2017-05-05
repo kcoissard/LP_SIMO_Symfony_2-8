@@ -1,2 +1,45 @@
-{# empty Twig template #}
-<p>toto : liste commandes clients </p>
+{% extends "VitrineBundle::layout.html.twig" %}
+
+{% block title %} Mes commandes {% endblock %}
+
+{% block content %}
+    <div class="content">
+        
+        {% set compteurCommande=0 %}
+        
+        {% for commande in lignescommande %}
+         
+        <div class="thumbnail commandes">
+            <div class="panel-default">
+                <div class="panel-heading"> Commande numéro {# commande['id_commande'] #}</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            {# if commande['vide']==FALSE #}
+                                    
+                                    {% set compteurLignes=0 %}
+                                    
+                                    {% for ligne in commande %}
+                                        
+                                        
+                                        <p>toto debug :{{ dump(commande[compteurLignes].article) }}</p>
+                                        {% set compteurLignes=compteurLignes+1 %}
+                                    {% endfor %}
+                                    <p>toto compteurLignes :{{ dump(compteurLignes) }}</p>
+                            {# else #}
+                                <!-- <div class="commande_vide">Cette commande est vide !</div> --> 
+                            {# endif #}
+                        </div>
+                        <!-- fin row -->
+                </div>
+                <!-- fin panel-body -->
+                <div class="panel-heading"> Prix total </div>
+            </div>
+            <!-- din panel-default -->
+        </div>
+        <!-- din thumbnail -->
+        {% set compteurCommande=compteurCommande+1 %}
+        {% endfor %}
+    </div>
+    <!-- fin content-->
+    
+{% endblock %}

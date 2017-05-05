@@ -153,4 +153,24 @@ class Commande
     {
         return $this->client;
     }
+    
+    
+    /**
+     * Trouver les commandes d'un client
+     * @param type $idClient
+     * @return type
+     */
+    public function findByClient($idClient){
+        $qb = $this->createQueryBuilder('commande');
+
+        $qb
+          ->where('commande.client = :client')
+          ->setParameter('client', $idClient)
+        ;
+
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+    }
 }

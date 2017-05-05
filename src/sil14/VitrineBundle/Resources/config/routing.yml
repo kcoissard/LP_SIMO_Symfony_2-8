@@ -62,4 +62,3 @@ confirmationPanier:
     path:     /panier/confirmationPanier
     defaults: { _controller: VitrineBundle:Panier:confirmationPanier}
     
-#...

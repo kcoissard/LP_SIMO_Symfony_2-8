@@ -141,4 +141,24 @@ class LigneCommande
     {
         return $this->quantite;
     }
+    
+    
+     /**
+      * Trouver les ligneCommande d'une commande
+      * @param type $idCommande
+      * @return type
+      */
+     public function findByCommande($idCommande){
+        $qb = $this->createQueryBuilder('ligneCommande');
+
+        $qb
+          ->where('ligneCommande.commande = :commande')
+          ->setParameter('commande', $idCommande)
+        ;
+
+        return $qb
+          ->getQuery()
+          ->getResult()
+        ;
+    }
 }

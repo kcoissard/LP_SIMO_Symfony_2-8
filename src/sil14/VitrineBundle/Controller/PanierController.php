@@ -250,17 +250,18 @@ class PanierController extends Controller{
                 }                    
                 $em->flush($ligneCommande);
             }
-        }else{
-          $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
-          return $this->render('VitrineBundle:Article:index.html.twig', array('articles' => $articles, 'form' => null));
-        }
         
-        $this->addFlash('success', "Commande validée");
-        $panier->viderPanier();
-        return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
-                array(
-                    'articles' => $articles,
-                    ));
+        
+            $this->addFlash('success', "Commande validée");
+            $panier->viderPanier();
+            return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
+                    array(
+                        'articles' => $articles,
+                        ));
+        }
+    
+        $this->addFlash('danger', "Panier vide, veuillez choisir un article avant de valider une commande.");
+        return $this->forward('VitrineBundle:Article:index');
     }
     
     

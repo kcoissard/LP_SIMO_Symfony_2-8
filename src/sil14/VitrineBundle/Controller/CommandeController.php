@@ -121,4 +121,68 @@ class CommandeController extends Controller
             ->getForm()
         ;
     }
+    
+    /*
+     * affichage des commandes selon l'id de l'user
+     */
+    public function listeCommandesAction(){
+        //si l'user est connecté, on affiche la liste de ses commandes
+        $session = $this->getRequest()->getSession();
+        if(!is_null($session->get('id_user'))){
+             $idClient=$session->get('id_user');
+             
+             $em = $this->getDoctrine()->getManager();
+             $liste_commandes = $em->getRepository('VitrineBundle:Commande')->findByClient($idClient);
+                
+                if(!empty($liste_commandes)){
+                    
+                    $renderArrayCommandes= array();
+                    $renderArrayLignesCommande= array();
+                    $compteur=0;
+                    
+                    foreach($liste_commandes as $commande){
+                        $renderArrayCommandes[$compteur]['id_commande']=$commande->getId();
+                        
+                        //au cas où il n'y ait pas de lignes
+                        $renderArrayCommandes[$compteur]['vide']=FALSE;
+                        
+                        //date et état
+                        $renderArrayCommandes[$compteur]['date']=$commande->getDate()->format('d-m-Y');
+                        $renderArrayCommandes[$compteur]['etat']=$commande->getValide();
+                        
+                        //on récupère les lignes
+                        $lignes_commande = $em->getRepository('VitrineBundle:ligneCommande')->findByCommande($commande->getId());
+                        
+                        if(!empty($lignes_commande)){
+                            $compteurLigne=0;
+                            
+                            foreach($lignes_commande as $ligne){
+                               //on récupère l'intitulé de l'article
+                               $articleLigne=$ligne->getArticle();
+
+                               $renderArrayLignesCommande[$compteur][$compteurLigne]=array(
+                                   'article' => $articleLigne->getLibelle(),
+                                   'prix'    => $ligne->getPrix(),
+                                   'quantite'=> $ligne->getQuantite(),
+                                   );
+
+                               $compteurLigne++;
+                            }
+                        }else{
+                            $renderArrayCommandes[$compteur]['vide']=TRUE;
+                        }
+                        
+                    $compteur++;
+                }
+             return $this->render('VitrineBundle:Commande:listeCommandesClient.html.twig',
+                array(
+                    'commandes' => $renderArrayCommandes,
+                    'lignescommande' => $renderArrayLignesCommande,
+                    ));
+        }
+    }
+    //autres cas
+          $this->addFlash('danger', "Vous n'êtes pas connecté.");
+          return $this->forward('VitrineBundle:Article:index');
+ }
 }
